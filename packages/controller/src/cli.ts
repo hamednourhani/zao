@@ -568,6 +568,13 @@ async function runAnalyzeCommand(parsed: ParsedArgs): Promise<void> {
 //
 // Guarded so importing this module for tests does not parse the test
 // runner's argv or exit the test process.
+//
+// Exported so the unified CLI wrapper (bin/zao.ts) can call main()
+// directly — import.meta.main is false when imported via dynamic import.
+
+export async function run(): Promise<void> {
+  await main();
+}
 
 if (import.meta.main) {
   await main();

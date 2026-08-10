@@ -13,5 +13,6 @@ if (cmd === "session" || cmd === "branch") {
   await import("../packages/harness/src/index.ts");
 } else {
   // Delegate to controller CLI (handles run/crunch/analyze/--help)
-  await import("../packages/controller/src/cli.ts");
+  const { run } = await import("../packages/controller/src/cli.ts");
+  await run();
 }
