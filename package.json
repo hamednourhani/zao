@@ -5,7 +5,7 @@
   "type": "module",
   "description": "Deterministic, file-based LLM agent orchestration platform — YAML blueprints, two-plane architecture, schema-validated state",
   "bin": {
-    "zao": "packages/controller/src/cli.ts"
+    "zao": "bin/zao.ts"
   },
   "workspaces": [
     "packages/contracts",
