@@ -1,4 +1,6 @@
 #!/usr/bin/env bun
+// Suppress AI SDK compatibility-mode warnings (noisy, shown on every call)
+(globalThis as Record<string, unknown>).AI_SDK_LOG_WARNINGS = false;
 /**
  * Controller CLI — `zao run` / `zao crunch` / `zao analyze` entry point.
  *
