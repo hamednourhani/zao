@@ -113,6 +113,13 @@ export class CheckpointManager {
   /**
    * Performs the actual checkpoint creation, updating internal state
    * on success. Failures are logged but never thrown.
+   *
+   * DESIGN NOTE: Checkpoint failures are intentionally non-fatal — the
+   * session continues without checkpoint safety. This is acceptable for
+   * transient errors (e.g., disk contention) but means persistent failures
+   * (e.g., disk full) will cause silent checkpoint loss across the entire
+   * session. A future enhancement could expose a `hasRecentFailure()` method
+   * so callers can choose to halt.
    */
   private async doCheckpoint(eventCount: number): Promise<void> {
     try {

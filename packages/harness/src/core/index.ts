@@ -1,5 +1,5 @@
 /**
- * Barrel export for all mo core modules.
+ * Barrel export for all zao core modules.
  *
  * @module core
  */

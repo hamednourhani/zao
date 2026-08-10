@@ -172,7 +172,8 @@ describe("createSandbox", () => {
   });
 
   test("warns before auto-git-init on non-git directories", async () => {
-    // Initialize logger to capture stderr output
+    // Reset singleton before init to avoid conflicts with other test suites
+    __internalResetLoggerForTest();
     __internalInitLogger("warn", false);
 
     const stderrOutput: string[] = [];
@@ -229,7 +230,8 @@ describe("createSandbox", () => {
   });
 
   test("no auto-git-init warning when already a git repo", async () => {
-    // Initialize logger to capture stderr output
+    // Reset singleton before init to avoid conflicts with other test suites
+    __internalResetLoggerForTest();
     __internalInitLogger("warn", false);
 
     const stderrOutput: string[] = [];

@@ -434,7 +434,7 @@ export async function handleSessionShow(
 
 // ── Session Branching ────────────────────────────────────────────────
 
-/** Options for `mo branch`. */
+/** Options for `zao branch`. */
 export interface BranchOptions {
   /** The source session id to branch from. */
   sourceId: string;
@@ -443,7 +443,7 @@ export interface BranchOptions {
 }
 
 /**
- * Handles the `mo branch <session_id> [--from-checkpoint <id>]` command.
+ * Handles the `zao branch <session_id> [--from-checkpoint <id>]` command.
  *
  * Creates a new peer parent session linked to the source via `branched_from`.
  * The source session is never modified.
@@ -467,7 +467,7 @@ export async function handleBranch(options: BranchOptions): Promise<void> {
 // ── Session Tree ─────────────────────────────────────────────────────
 
 /**
- * Handles the `mo session tree <session_id>` command.
+ * Handles the `zao session tree <session_id>` command.
  *
  * Displays two trees:
  * 1. **Agent tree**: delegation hierarchy from `agents/index.jsonl`

@@ -133,7 +133,7 @@ const RESULT_ARTIFACT_NAME = "result.json";
  * @param llmClient - Optional pre-resolved LLM client. When omitted,
  *   a default registry is created and the role's `llm_id` is used.
  * @param llmOptions - Optional temperature/maxTokens overrides.
- * @param projectDir - Root of the mo project (where `.zao/` lives).
+ * @param projectDir - Root of the zao project (where `.zao/` lives).
  *   @default process.cwd()
  * @param _generateObjectFn - **Internal/test-only.** Mock injection
  *   point for deterministic tests. Do not use in production.

@@ -5,12 +5,12 @@ The harness is the single-job LLM execution engine. It manages sessions, token b
 ## CLI Commands
 
 ```bash
-mo run [--yes] [--role <name>] <task>
-mo continue <session_id> [--yes] [--recent-events N]
-mo branch <session_id> [--from-checkpoint <id>]
-mo session list [--status ...] [--repo ...] [--since ...] [--limit N]
-mo session show <session_id> [--format json]
-mo session tree <session_id>
+zao run [--yes] [--role <name>] <task>
+zao continue <session_id> [--yes] [--recent-events N]
+zao branch <session_id> [--from-checkpoint <id>]
+zao session list [--status ...] [--repo ...] [--since ...] [--limit N]
+zao session show <session_id> [--format json]
+zao session tree <session_id>
 ```
 
 ## Core Exports

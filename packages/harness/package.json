@@ -3,6 +3,7 @@
   "module": "src/index.ts",
   "type": "module",
   "private": true,
+  "bin": { "zao": "src/index.ts" },
   "devDependencies": {
     "@types/bun": "latest"
   },

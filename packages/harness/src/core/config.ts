@@ -139,7 +139,7 @@ function parseConfigYaml(raw: string): Record<string, unknown> {
  * - Unreadable config file → empty config, warning logged.
  * - Invalid values for `temperature` / `max_tokens` → silently ignored.
  *
- * @param projectDir - Root of the mo project (where `.zao/` lives).
+ * @param projectDir - Root of the zao project (where `.zao/` lives).
  * @returns A resolved `LoopConfig` instance.
  */
 export async function loadConfig(projectDir: string): Promise<LoopConfig> {

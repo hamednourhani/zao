@@ -1,4 +1,4 @@
-# Shipped defaults for mo agent roles.
+# Shipped defaults for zao agent roles.
 # This file is the base layer — all other config layers overlay on top of it.
 # See ADR-005 for the config layering model.
 schema_version: "0.2.0"

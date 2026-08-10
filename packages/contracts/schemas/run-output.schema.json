@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/hamednourhani/yue/schemas/run-output.schema.json",
-  "title": "mo run-output schema",
-  "description": "stdout envelope contract for mo ↔ Rey integration. Contains final run envelope and pending_interaction variant for HITL relay in json mode.",
+  "title": "zao run-output schema",
+  "description": "stdout envelope contract for zao ↔ Rey integration. Contains final run envelope and pending_interaction variant for HITL relay in json mode.",
   "type": "object",
   "properties": {
     "schema_version": { "type": "string", "enum": ["0.2.0"] },

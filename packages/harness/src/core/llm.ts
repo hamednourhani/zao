@@ -1,7 +1,7 @@
 /**
  * Core LLM call with schema validation and retry logic.
  *
- * Implements `generateStructuredResponse()` — the atomic unit of mo's harness.
+ * Implements `generateStructuredResponse()` — the atomic unit of zao's harness.
  * Makes a structured API call to an LLM, enforces the response schema via Zod,
  * and retries with descriptive error feedback on failure.
  *

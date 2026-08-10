@@ -6,30 +6,30 @@ Every zao run creates a session with a unique UUIDv7 identifier. Sessions are st
 
 ```bash
 # List all sessions
-mo session list
+zao session list
 
 # Filter by status
-mo session list --status complete
-mo session list --status active
-mo session list --status failed
+zao session list --status complete
+zao session list --status active
+zao session list --status failed
 
 # Filter by date
-mo session list --since 2026-08-01
+zao session list --since 2026-08-01
 
 # Limit results
-mo session list --limit 10
+zao session list --limit 10
 
 # JSON output
-mo session list --format json
+zao session list --format json
 ```
 
 ## Showing Session Details
 
 ```bash
-mo session show <session_id>
+zao session show <session_id>
 
 # JSON output
-mo session show <session_id> --format json
+zao session show <session_id> --format json
 ```
 
 Output includes:
@@ -43,7 +43,7 @@ Output includes:
 ## Session Tree
 
 ```bash
-mo session tree <session_id>
+zao session tree <session_id>
 ```
 
 Shows two trees:

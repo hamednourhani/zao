@@ -1,5 +1,5 @@
 /**
- * Context window constructor for mo — the interface between mo's
+ * Context window constructor for zao — the interface between zao's
  * deterministic harness and the non-deterministic LLM.
  *
  * Assembles LLM prompts in strict 4-layer ordering to optimize prompt

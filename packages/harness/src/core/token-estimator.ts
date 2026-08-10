@@ -73,6 +73,10 @@ class GptTokenizerEstimator implements TokenEstimator {
 /**
  * Creates a token estimator with the given strategy.
  *
+ * NOTE: `createTokenEstimator("auto")` returns a GptTokenizerEstimator without
+ * provider awareness. For provider-aware auto-selection (gpt-tokenizer for
+ * openai/deepseek, heuristic fallback for others), use `estimateTokens()`.
+ *
  * @param strategy - The estimation strategy ("auto", "heuristic", or "gpt-tokenizer").
  * @returns A TokenEstimator instance.
  */
@@ -100,6 +104,9 @@ export function createTokenEstimator(
  * @param provider - The LLM provider (e.g. "openai", "deepseek").
  * @param strategy - The configured tokenizer strategy.
  * @returns Estimated token count.
+ *
+ * NOTE: This is the provider-aware entry point. Prefer this over
+ * `createTokenEstimator("auto")` which does not consider provider.
  */
 export function estimateTokens(
   text: string,

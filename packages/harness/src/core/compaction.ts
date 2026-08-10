@@ -308,7 +308,7 @@ export async function runCompactionFlow(
       params.estimatedTokens ?? params.modelConfig.contextWindow,
     contextWindow: params.modelConfig.contextWindow,
     threshold: params.modelConfig.compactionThreshold ?? 0.65,
-    tokensAfter: Math.ceil(summary.length / 4),
+    tokensAfter: Math.ceil(summary.length / 4), // TODO: use encode(summary).length when gpt-tokenizer available for better accuracy
     promptPreview: summary.slice(0, 2000),
     summaryPath,
   });

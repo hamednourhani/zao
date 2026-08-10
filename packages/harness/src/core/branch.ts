@@ -115,7 +115,10 @@ export async function branchSession(
   if (eventsContent) {
     const lines = eventsContent.split("\n").filter((l) => l.trim().length > 0);
     const lastEvents = lines.slice(-500).join("\n") + (lines.length > 500 ? "\n" : "");
-    await writeArtifact(join(branchDir, "events.jsonl"), lastEvents || "\n");
+    // Guard: only write if there's actual content after truncation
+    if (lastEvents.trim()) {
+      await writeArtifact(join(branchDir, "events.jsonl"), lastEvents + "\n");
+    }
   }
 
   // 5. Write new session.json with branched_from

@@ -9,6 +9,7 @@
  */
 
 import type { EventLogEntry } from "../schemas/event-log.ts";
+import { logger } from "./logger.ts";
 
 // ── Strategy Interface ──────────────────────────────────────────────
 
@@ -336,9 +337,8 @@ export function resolveCompactionStrategy(
       return new HierarchicalStrategy(generate);
     default:
       // Unknown strategy: warn and fall back to abstractive
-      // Note: using a minimal logger here to avoid circular deps
-      process.stderr.write(
-        `[WARN] Unknown compaction strategy "${name}" — falling back to abstractive-llm.\n`,
+      logger.warn(
+        `Unknown compaction strategy "${name}" — falling back to abstractive-llm.`,
       );
       return new AbstractiveStrategy(generate);
   }

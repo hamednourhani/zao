@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/hamednourhani/yue/schemas/flow.schema.json",
-  "title": "mo flow schema",
-  "description": "Flow definition — ordered list of steps executed by mo's sequential executor. Consumed by mo (execution engine) and authored by Rey (orchestration package generator) or directly by users.",
+  "title": "zao flow schema",
+  "description": "Flow definition — ordered list of steps executed by zao's sequential executor. Consumed by zao (execution engine) and authored by Rey (orchestration package generator) or directly by users.",
   "type": "object",
   "properties": {
     "schema_version": {

@@ -8,11 +8,11 @@
 
 ## Setup
 
-1. **Clone mo:**
+1. **Clone zao:**
 
 ```bash
-git clone https://github.com/hamednourhani/mo.git
-cd mo
+git clone https://github.com/hamednourhani/zao.git
+cd zao
 ```
 
 2. **Install dependencies:**
@@ -44,7 +44,7 @@ bun run packages/harness/src/index.ts run "Hello, world"
 ## First Command
 
 ```bash
-# Run the dev-cycle blueprint on mo's own code
+# Run the dev-cycle blueprint on zao's own code
 bun run packages/controller/src/cli.ts run \
   --flow dev-cycle \
   "Add a comment to the README"

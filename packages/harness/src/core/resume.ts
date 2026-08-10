@@ -1,5 +1,5 @@
 /**
- * Session Resume — `mo continue` implementation (single-session only).
+ * Session Resume — `zao continue` implementation (single-session only).
  *
  * ## Core guarantees (TD-029-F slimmed)
  *

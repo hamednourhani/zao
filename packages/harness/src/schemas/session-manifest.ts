@@ -4,7 +4,7 @@
  * ## Schema version: 0.2.0
  *
  * Each session directory contains a `session.json` file conforming
- * to one of these schemas. Parents represent a full mo run; children
+ * to one of these schemas. Parents represent a full zao run; children
  * represent subagent delegations spawned by a parent.
  *
  * @module session-manifest
@@ -50,7 +50,7 @@ const ModelConfigSchema = z
 /**
  * Schema for a parent (root) session manifest.
  *
- * One manifest per mo run. `parent_session_id` is always `null`.
+ * One manifest per zao run. `parent_session_id` is always `null`.
  * Written once at session creation; `status` and `updated_at` are
  * updated on completion.
  */

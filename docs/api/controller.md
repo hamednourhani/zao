@@ -5,9 +5,9 @@ The controller orchestrates multi-step flows by loading blueprints and dispatchi
 ## CLI Commands
 
 ```bash
-mo run [--blueprint <name>] [--yes] [--verbose|--quiet] <task>
-mo run --flow dev-cycle "Fix the subtraction bug"
-mo run --flow bug-fix "Resolve null pointer in auth"
+zao run [--blueprint <name>] [--yes] [--verbose|--quiet] <task>
+zao run --flow dev-cycle "Fix the subtraction bug"
+zao run --flow bug-fix "Resolve null pointer in auth"
 ```
 
 ## Core Exports
@@ -57,9 +57,9 @@ initLogger({ level: "debug" });  // or "error", "warn", "info"
 ### Verbosity Flags
 
 ```bash
-mo run --verbose "Task"     # Debug-level logging
-mo run --quiet "Task"       # Error-only logging
-mo run "Task"               # Default: info-level
+zao run --verbose "Task"     # Debug-level logging
+zao run --quiet "Task"       # Error-only logging
+zao run "Task"               # Default: info-level
 ```
 
 ## Step Result Structure

@@ -31,6 +31,8 @@ export async function requestApproval(question: string): Promise<boolean> {
 
   // In Bun, `console` is an async iterable that yields lines from stdin.
   // This works in both TTY and non-TTY modes.
+  // NOTE: Bun-specific API — will not work under Node.js without a polyfill.
+  // If Node.js portability is needed, add a fallback using readline.createInterface.
   for await (const line of console) {
     const answer = line.trim().toLowerCase();
     return answer === "y" || answer === "yes";

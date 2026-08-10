@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://github.com/hamednourhani/yue/schemas/execution-result.schema.json",
-  "title": "mo execution aggregate result schema",
+  "title": "zao execution aggregate result schema",
   "description": "Controller-level aggregate result written to result.json in the execution directory at the end of a run. Contains per-step statuses, token usage, and execution-level metadata.",
   "type": "object",
   "properties": {

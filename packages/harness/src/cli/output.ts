@@ -5,7 +5,7 @@
  *
  * In json mode, stdout carries ONLY a single parseable JSON object.
  * All logs, warnings, drift notes, and config notices go to stderr.
- * This is the mo↔Rey contract: Rey parses stdout.
+ * This is the zao↔Rey contract: Rey parses stdout.
  *
  * @module output
  */
@@ -93,7 +93,7 @@ export type HITLDecisionResult =
  *
  * On invalid input, the envelope is re-emitted and stdin is re-read
  * up to 3 times total. This prevents desync where a second
- * pending_interaction is emitted on stdout but mo has already
+ * pending_interaction is emitted on stdout but zao has already
  * moved on — leaving an unread decision in Rey's stdin buffer
  * that corrupts the next interaction.
  *

@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mo.dev/schemas/flow-package.schema.json",
+  "$id": "https://zao.dev/schemas/flow-package.schema.json",
   "title": "Flow Package Metadata",
   "description": "Metadata for a flow package directory. A flow package bundles a flow definition, role definitions, and package metadata into a self-contained unit.",
   "type": "object",

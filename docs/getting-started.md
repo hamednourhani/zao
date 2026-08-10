@@ -1,13 +1,13 @@
-# Getting Started with mo
+# Getting Started with zao
 
-mo is a deterministic, file-based agent orchestration platform. It executes LLM-powered workflows defined as blueprints.
+zao is a deterministic, file-based agent orchestration platform. It executes LLM-powered workflows defined as blueprints.
 
 ## Quick Setup
 
 ```bash
 # 1. Clone and install
-git clone https://github.com/hamednourhani/mo.git
-cd mo
+git clone https://github.com/hamednourhani/zao.git
+cd zao
 bun install
 
 # 2. Configure your LLM provider
@@ -37,17 +37,17 @@ bun run packages/controller/src/cli.ts run \
 ## Key Commands
 
 ```bash
-mo run "Task"                           # Run a single task
-mo run --flow dev-cycle "Task"          # Run a blueprint
-mo continue <session_id>                # Resume an interrupted session
-mo session list                         # List all sessions
-mo session show <session_id>            # Inspect a session
-mo branch <session_id>                  # Create a branch
+zao run "Task"                           # Run a single task
+zao run --flow dev-cycle "Task"          # Run a blueprint
+zao continue <session_id>                # Resume an interrupted session
+zao session list                         # List all sessions
+zao session show <session_id>            # Inspect a session
+zao branch <session_id>                  # Create a branch
 ```
 
 ## Next Steps
 
-- [Architecture Overview](architecture/overview.md) — how mo works
+- [Architecture Overview](architecture/overview.md) — how zao works
 - [First Run](usage/first-run.md) — detailed walkthrough
 - [Custom Blueprints](usage/custom-flows.md) — create your own workflows
 - [API Reference](api/harness.md) — programmatic usage

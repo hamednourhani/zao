@@ -1,5 +1,5 @@
 /**
- * Barrel export for all mo schema contracts.
+ * Barrel export for all zao schema contracts.
  *
  * Each module exports both the Zod schema (for runtime validation) and
  * the inferred TypeScript type (for compile-time safety).

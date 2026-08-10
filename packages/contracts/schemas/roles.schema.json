@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mo.dev/schemas/roles.schema.json",
-  "title": "mo roles file schema",
-  "description": "Schema for the mo roles configuration file. Defines agent roles, their prompts, context budgets, and LLM model assignments.",
+  "$id": "https://zao.dev/schemas/roles.schema.json",
+  "title": "zao roles file schema",
+  "description": "Schema for the zao roles configuration file. Defines agent roles, their prompts, context budgets, and LLM model assignments.",
   "type": "object",
   "additionalProperties": false,
   "required": ["schema_version", "model_defaults", "roles"],

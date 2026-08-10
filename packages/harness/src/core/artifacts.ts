@@ -1,5 +1,5 @@
 /**
- * Artifact I/O & Atomic File Operations — the foundation of mo's
+ * Artifact I/O & Atomic File Operations — the foundation of zao's
  * file-based state machine.
  *
  * ## Core guarantees
@@ -408,7 +408,7 @@ export interface InitSessionParams {
    */
   nodeId?: string;
   /**
-   * Root of the mo project. Used only for repo identity capture
+   * Root of the zao project. Used only for repo identity capture
    * on root sessions. Defaults to `process.cwd()`.
    */
   projectDir?: string;

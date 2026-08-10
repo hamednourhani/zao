@@ -1,5 +1,5 @@
 /**
- * @clack/prompts wrapper for mo's HITL permission prompt.
+ * @clack/prompts wrapper for zao's HITL permission prompt.
  *
  * Replaces the raw stdin `Bun.prompt()` interaction in `hitl.ts`'s Tier 1
  * interactive path with a color-coded, arrow-key-navigable prompt when

@@ -12,7 +12,7 @@ The execution engine — a single-job, file-based LLM agent harness.
 - Context window management: token budgeting, compaction
 - LLM interaction: structured generation, caching, retry
 - Human-in-the-loop: approval prompts for irreversible actions
-- CLI: `zao run`, `mo continue`, `mo session`, `mo branch`
+- CLI: `zao run`, `zao continue`, `zao session`, `zao branch`
 
 **Key modules:**
 | Module | Purpose |

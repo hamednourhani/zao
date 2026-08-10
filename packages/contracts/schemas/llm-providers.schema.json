@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://mo.dev/schemas/llm-providers.schema.json",
-  "title": "mo LLM providers config schema",
+  "$id": "https://zao.dev/schemas/llm-providers.schema.json",
+  "title": "zao LLM providers config schema",
   "description": "Schema for the llm-providers.yaml configuration file. Defines which LLM providers and models are available.",
   "type": "object",
   "additionalProperties": false,

@@ -1,5 +1,5 @@
 /**
- * MemoryState schema — validates the `mo` orchestrator state file.
+ * MemoryState schema — validates the `zao` orchestrator state file.
  *
  * Tracks the orchestrator's current phase, active session, and phase
  * history. The phases array is intentionally flat (array of {name, status})
@@ -20,7 +20,7 @@ export const PhaseEntrySchema = z
   })
   .strict();
 
-/** Validates the full `mo` orchestrator state file. */
+/** Validates the full `zao` orchestrator state file. */
 export const MemoryStateSchema = z
   .object({
     /** Schema contract version — locked to "0.1.0" per GUARDRAILS Rule 7. */

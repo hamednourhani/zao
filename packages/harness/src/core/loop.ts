@@ -1,5 +1,5 @@
 /**
- * The core run loop — mo's single-job execution pipeline.
+ * The core run loop — zao's single-job execution pipeline.
  *
  * Wires together the full pipeline from Story 002–005:
  *
@@ -173,7 +173,7 @@ const OUTPUT_ARTIFACT_NAME = "result.json";
 // ── Core Function ──────────────────────────────────────────────────
 
 /**
- * Executes a single pass of the mo harness pipeline for a given task.
+ * Executes a single pass of the zao harness pipeline for a given task.
  *
  * ## Pipeline steps
  *

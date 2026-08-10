@@ -1,5 +1,5 @@
 /**
- * Role definition schemas — the contract between mo and role config files.
+ * Role definition schemas — the contract between zao and role config files.
  *
  * @module role-definition
  */
@@ -27,7 +27,7 @@ export const ResolvedRoleDefinitionSchema = z
 
 /**
  * A fully resolved role definition with provenance tracking.
- * This is what the rest of mo consumes — not the raw config schema.
+ * This is what the rest of zao consumes — not the raw config schema.
  */
 export interface ResolvedRoleDefinition {
   prompt_template: string;
