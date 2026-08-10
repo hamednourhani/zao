@@ -1,6 +1,6 @@
 # LLM Providers Configuration — example template
-# Copy this to ~/.mo/llm-providers.yaml and uncomment/edit the providers you use.
-# Override the path with --llm-providers <path> or MO_LLM_PROVIDERS_PATH.
+# Copy this to ~/.zao/llm-providers.yaml and uncomment/edit the providers you use.
+# Override the path with --llm-providers <path> or ZAO_LLM_PROVIDERS_PATH.
 #
 # llm_id format: provider:model-slug
 # Credentials use ${ENV_VAR} substitution — never hardcode keys.

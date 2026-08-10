@@ -20,19 +20,25 @@ if (existsSync(configFile)) {
   process.exit(0);
 }
 
+const defaultProvider = "deepseek";
+const defaultModel = "deepseek-chat";
+
+const configContent = (apiKey: string) => [
+  "llm_providers:",
+  `  ${defaultProvider}:`,
+  `    api_key: "${apiKey}"`,
+  "    models:",
+  `      ${defaultModel}:`,
+  `        api_model_id: "${defaultModel}"`,
+  ""
+].join("\n");
+
 // Non-interactive mode
 const apiKeyArg = process.argv.find(a => a.startsWith("--api-key="));
 if (apiKeyArg) {
   const key = apiKeyArg.split("=")[1];
   mkdirSync(configDir, { recursive: true });
-  writeFileSync(configFile, [
-    "llm_providers:",
-    "  deepseek:",
-    `    api_key: "${key}"`,
-    "    default_model: deepseek-chat",
-    "    models: [deepseek-chat]",
-    ""
-  ].join("\n"));
+  writeFileSync(configFile, configContent(key));
   console.log(`✓ Config created at ${configFile}`);
   process.exit(0);
 }
@@ -47,14 +53,7 @@ if (!apiKey) {
 }
 
 mkdirSync(configDir, { recursive: true });
-writeFileSync(configFile, [
-    "llm_providers:",
-    "  deepseek:",
-    `    api_key: "${apiKey}"`,
-    "    default_model: deepseek-chat",
-    "    models: [deepseek-chat]",
-    ""
-  ].join("\n"));
+writeFileSync(configFile, configContent(apiKey));
 
 console.log(`\n✓ Config created at ${configFile}`);
-console.log('  Try: zao run dev-cycle "Your first task" --verbose');
+console.log('  Try: zao run --blueprint dev-cycle --task "Your first task" --verbose');

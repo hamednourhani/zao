@@ -36,8 +36,9 @@ Or do it manually — create `~/.zao/llm-providers.yaml`:
 llm_providers:
   deepseek:
     api_key: "${DEEPSEEK_API_KEY}"
-    default_model: deepseek-chat
-    models: [deepseek-chat]
+    models:
+      deepseek-chat:
+        api_model_id: "deepseek-chat"
 ```
 
 ### 3. Run Your First Task

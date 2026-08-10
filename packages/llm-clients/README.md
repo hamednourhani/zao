@@ -1,6 +1,6 @@
 # @zao/llm-clients
 
-LLM client registry for mo — the single component that owns provider credentials, maps canonical `llm_id`s to provider-specific API model IDs, and creates Vercel AI SDK models on demand.
+LLM client registry for zao — the single component that owns provider credentials, maps canonical `llm_id`s to provider-specific API model IDs, and creates Vercel AI SDK models on demand.
 
 ## Quick start
 
@@ -33,7 +33,7 @@ llm_providers:
         api_model_id: "gpt-4o-mini"
 ```
 
-Override the path with `--llm-providers <path>` or `MO_LLM_PROVIDERS_PATH`.
+Override the path with `--llm-providers <path>` or `ZAO_LLM_PROVIDERS_PATH`.
 
 ## API
 

@@ -6,20 +6,22 @@ LLM provider registry and client lifecycle management.
 
 ```yaml
 # ~/.zao/llm-providers.yaml
-providers:
+llm_providers:
   deepseek:
     api_key: "${DEEPSEEK_API_KEY}"
-    default_model: deepseek-chat
     models:
-      - deepseek-chat
-      - deepseek-reasoner
+      deepseek-chat:
+        api_model_id: "deepseek-chat"
+      deepseek-reasoner:
+        api_model_id: "deepseek-reasoner"
 
   openai:
     api_key: "${OPENAI_API_KEY}"
-    default_model: gpt-4o
     models:
-      - gpt-4o
-      - gpt-4o-mini
+      gpt-4o:
+        api_model_id: "gpt-4o"
+      gpt-4o-mini:
+        api_model_id: "gpt-4o-mini"
 ```
 
 ## Core Exports
