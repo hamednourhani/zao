@@ -1,7 +1,28 @@
 .PHONY: install test test-fast lint build dist-macos dist-linux clean
 
-install:  ## install dependencies across all packages
+install:  ## one-stop setup — install deps, link binary, show config steps
+	@echo "==> Installing dependencies..."
 	bun install
+	@echo ""
+	@echo "==> Linking zao binary..."
+	bun link
+	@echo ""
+	@echo "==> zao is now installed globally. Type 'zao' to verify."
+	@echo ""
+	@if [ -f "$$HOME/.zao/llm-providers.yaml" ]; then \
+		echo "✓ Config found at ~/.zao/llm-providers.yaml"; \
+	else \
+		echo "► No config found. Create one:"; \
+		echo ""; \
+		echo '  mkdir -p ~/.zao'; \
+		echo '  echo "providers:" > ~/.zao/llm-providers.yaml'; \
+		echo '  echo "  deepseek:" >> ~/.zao/llm-providers.yaml'; \
+		echo '  echo \"    api_key: \\\"\$$DEEPSEEK_API_KEY\\\"\" >> ~/.zao/llm-providers.yaml'; \
+		echo '  echo "    default_model: deepseek-chat" >> ~/.zao/llm-providers.yaml'; \
+		echo "  export DEEPSEEK_API_KEY=sk-your-key-here"; \
+		echo ""; \
+		echo '  Then: zao run dev-cycle "Your first task"'; \
+	fi
 
 test:  ## full gate — tsc + guardrail grep + bun test (incl. e2e)
 	cd packages/contracts && bun test

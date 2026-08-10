@@ -1,51 +1,82 @@
 # Getting Started with zao
 
-zao is a deterministic, file-based agent orchestration platform. It executes LLM-powered workflows defined as blueprints.
+zao is a deterministic, file-based LLM agent orchestration platform. You define workflows as YAML blueprints, zao executes them step-by-step, and every output is saved as schema-validated JSON — crash-safe by design.
 
-## Quick Setup
+## 3 Steps to First Run
 
+### 1. Clone & Install
 ```bash
-# 1. Clone and install
 git clone https://github.com/hamednourhani/zao.git
-cd zao
-bun install
+cd zao && make install
+```
 
-# 2. Configure your LLM provider
-mkdir -p ~/.zao
-echo 'providers:
+This installs all 7 packages and makes `zao` available globally.
+
+### 2. Add Your API Key
+```bash
+bun run scripts/setup-config.ts
+```
+Or create `~/.zao/llm-providers.yaml` manually:
+```yaml
+providers:
   deepseek:
     api_key: "${DEEPSEEK_API_KEY}"
     default_model: deepseek-chat
-    models: [deepseek-chat]' > ~/.zao/llm-providers.yaml
-
-# 3. Run your first task
-zao run "Hello, world"
-
-# 4. Run a dev-cycle blueprint
-zao run --flow dev-cycle --task "Fix the login bug in auth.ts"
+    models: [deepseek-chat]
 ```
+
+### 3. Run
+```bash
+export DEEPSEEK_API_KEY="sk-your-key"
+zao run --blueprint dev-cycle --task "Add a test for the login handler" --verbose
+```
+
+That's it. zao will plan, implement, test, and review — saving every step to `~/.zao/executions/`.
 
 ## Core Concepts
 
-- **Blueprint**: A YAML file that defines a multi-step workflow (read → plan → implement → review)
-- **Harness**: The execution engine that runs single LLM tasks
-- **Controller**: The orchestrator that loads blueprints and dispatches steps
-- **Session**: A single run, stored as JSON files in `~/.zao/sessions/`
+| Concept | What it is |
+|---------|------------|
+| **Blueprint** | YAML file defining a multi-step workflow (plan → implement → test → review) |
+| **Harness** | Execution engine — runs single LLM tasks, manages sessions and state |
+| **Controller** | Orchestrator — loads blueprints, dispatches steps, handles the human gate |
+| **Session** | A single run stored as JSON files in `~/.zao/executions/` — survives crashes |
 
 ## Key Commands
 
 ```bash
-zao run "Task"                           # Run a single task
-zao run --flow dev-cycle "Task"          # Run a blueprint
-zao continue <session_id>                # Resume an interrupted session
-zao session list                         # List all sessions
-zao session show <session_id>            # Inspect a session
-zao branch <session_id>                  # Create a branch
+# Run a blueprint
+zao run --blueprint dev-cycle --task "Fix the login bug"
+zao run --blueprint code-review --task "Review src/auth.ts"
+
+# Run a flow package
+zao run --flow default --task "Refactor the auth module"
+
+# Research a question (advisory plane)
+zao crunch "How should we handle rate limiting?"
+
+# Analyze session patterns
+zao analyze
+
+# Session management
+zao session list                    # List all sessions
+zao session show <session_id>       # Inspect a session
+zao session tree <session_id>       # View branch tree
+
+# Branching
+zao branch <session_id>             # Create a branch from a session
+
+# CLI flags
+--verbose, -v     Debug-level logging (see everything)
+--quiet, -q       Errors only
+--yes, -y         Auto-approve non-destructive actions
+--no-sandbox      Disable git worktree isolation
 ```
 
 ## Next Steps
 
-- [Architecture Overview](architecture/overview.md) — how zao works
-- [First Run](usage/first-run.md) — detailed walkthrough
+- [Architecture Overview](architecture/overview.md) — two-plane design, how zao works
+- [First Run Walkthrough](usage/first-run.md) — detailed step-by-step
 - [Custom Blueprints](usage/custom-flows.md) — create your own workflows
-- [API Reference](api/harness.md) — programmatic usage
+- [Session Inspection](usage/session-inspection.md) — browse and resume sessions
+- [API Reference](api/harness.md) — package-level documentation

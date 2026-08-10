@@ -18,26 +18,20 @@ Read the full rationale in [docs/architecture/overview.md](docs/architecture/ove
 
 ### Prerequisites
 - [Bun](https://bun.sh) >= 1.0
-- A DeepSeek API key (or any OpenAI-compatible provider)
+- A [DeepSeek API key](https://platform.deepseek.com/api_keys)
 
-### Install
+### 1. Clone & Install
 ```bash
 git clone https://github.com/hamednourhani/zao.git
-cd zao && make install       # or: bun install
+cd zao && make install
 ```
+This installs all 7 packages, links the `zao` binary globally, and guides you through config.
 
-This installs all 7 packages via Bun workspaces. Run zao locally:
-
+### 2. Set Up Your API Key
 ```bash
-# Direct invocation (always works)
-bun run packages/controller/src/cli.ts run dev-cycle "My first task"
-
-# Or make 'zao' a global command
-bun link && zao run dev-cycle "My first task"
+bun run scripts/setup-config.ts
 ```
-
-### Configure
-Create `~/.zao/llm-providers.yaml`:
+Or do it manually — create `~/.zao/llm-providers.yaml`:
 ```yaml
 providers:
   deepseek:
@@ -45,6 +39,14 @@ providers:
     default_model: deepseek-chat
     models: [deepseek-chat]
 ```
+
+### 3. Run Your First Task
+```bash
+export DEEPSEEK_API_KEY="sk-your-key"
+zao run dev-cycle "add a test for the login handler" --verbose
+```
+
+That's it. Three steps — clone, config, run. The `zao` command does everything else.
 
 ## Usage
 
