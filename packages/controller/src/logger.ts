@@ -1,5 +1,5 @@
 /**
- * Leveled logger singleton for mo controller — writes exclusively to stderr
+ * Leveled logger singleton for zao controller — writes exclusively to stderr
  * to preserve stdout purity for JSON-mode results (TD-020).
  *
  * ## Stream Routing

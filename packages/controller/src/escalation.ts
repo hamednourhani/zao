@@ -3,7 +3,7 @@
  *
  * ## REQ-5: No Stuck States — Timeout and Escalation
  *
- * mo must never hang or loop forever without escalating to the user.
+ * zao must never hang or loop forever without escalating to the user.
  * This module provides the escalation UI for:
  * - **Timeouts**: step or loop timeout exceeded
  * - **Security violations**: path out of scope or tool not allowed

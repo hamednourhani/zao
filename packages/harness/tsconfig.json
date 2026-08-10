@@ -22,7 +22,7 @@
     "noUncheckedIndexedAccess": true,
     "noImplicitOverride": true,
 
-    // Stricter flags — enabled for mo project
+    // Stricter flags — enabled for zao project
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noPropertyAccessFromIndexSignature": false

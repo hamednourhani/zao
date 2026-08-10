@@ -445,7 +445,7 @@ describe("Execution Store — Manifest operations", () => {
 // ── Store Root Resolution ─────────────────────────────────────
 
 describe("Execution Store — Store root resolution", () => {
-  test("resolveExecutionStoreRoot resolves to a path under .mo", async () => {
+  test("resolveExecutionStoreRoot resolves to a path under .zao", async () => {
     // Use a temp ZAO_HOME to avoid creating ~/.zao in the real home directory
     const customBase = makeTempDir();
     const savedMoHome = process.env["ZAO_HOME"];

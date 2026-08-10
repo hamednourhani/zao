@@ -67,7 +67,7 @@ async function createGlobalIndex(
 
 describe("runAnalyzeCLI", () => {
   test("analyzes sessions and returns patterns and learnings", async () => {
-    const storeRoot = path.join(tempDir, "mo-store");
+    const storeRoot = path.join(tempDir, "zao-store");
     await fs.mkdir(storeRoot, { recursive: true });
 
     // Create sample session data

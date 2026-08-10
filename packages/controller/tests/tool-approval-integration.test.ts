@@ -213,7 +213,7 @@ class ApprovalAwareMockHarness implements HarnessClient {
           return {
             success: false,
             sessionId: params.sessionId ?? randomUUID(),
-            sessionDir: `/tmp/mo-approval-test-session`,
+            sessionDir: `/tmp/zao-approval-test-session`,
             events: [],
             error: approvalResponse.feedback ?? "Denied by user",
           };

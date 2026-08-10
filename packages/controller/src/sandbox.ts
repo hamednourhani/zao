@@ -5,7 +5,7 @@
  * ## Design
  *
  * Before the controller executes any steps, a git worktree is created
- * at `/tmp/mo-sandbox-<executionId>`. All harness operations
+ * at `/tmp/zao-sandbox-<executionId>`. All harness operations
  * (readFile, writeFile, executeShell) then operate inside the worktree.
  *
  * On approval: the diff from the worktree is applied to the original
@@ -63,7 +63,7 @@ export interface SandboxOptions {
 // ── Constants ──────────────────────────────────────────────────────
 
 /** Prefix for sandbox worktree directories. */
-const SANDBOX_PREFIX = join(tmpdir(), "mo-sandbox-");
+const SANDBOX_PREFIX = join(tmpdir(), "zao-sandbox-");
 
 // ── Helpers ────────────────────────────────────────────────────────
 
@@ -105,7 +105,7 @@ async function isGitRepo(
 
 /**
  * Auto-initializes a git repository in the given directory.
- * Runs `git init && git add -A && git commit --allow-empty -m "mo sandbox init"`.
+ * Runs `git init && git add -A && git commit --allow-empty -m "zao sandbox init"`.
  * Returns `true` on success, `false` on failure.
  */
 async function initGitRepo(
@@ -120,7 +120,7 @@ async function initGitRepo(
 
   try {
     await execAsync(
-      `${git(options)} init && ${git(options)} add -A && ${git(options)} commit --allow-empty -m "mo sandbox init"`,
+      `${git(options)} init && ${git(options)} add -A && ${git(options)} commit --allow-empty -m "zao sandbox init"`,
       { encoding: "utf-8", cwd: dir },
     );
     return true;
@@ -134,13 +134,13 @@ async function initGitRepo(
 // ── Core Functions ─────────────────────────────────────────────────
 
 /**
- * Creates a detached git worktree at `/tmp/mo-sandbox-<executionId>`.
+ * Creates a detached git worktree at `/tmp/zao-sandbox-<executionId>`.
  *
  * The worktree is a checked-out copy of the HEAD commit (detached),
  * so the LLM can modify files freely without touching the real tree.
  *
  * If `projectDir` is not a git repo, this function auto-initializes one
- * (`git init && git add -A && git commit -m "mo sandbox init"`) and then
+ * (`git init && git add -A && git commit -m "zao sandbox init"`) and then
  * creates the worktree. If git is not available at all, a warning is
  * logged and `null` is returned (sandbox skipped).
  *
@@ -270,7 +270,7 @@ export async function applySandboxChanges(
     // exec implementations — temp file is portable).
     let patchFile: string;
     try {
-      const tmpDir = await mkdtemp(join(tmpdir(), "mo-sandbox-patch-"));
+      const tmpDir = await mkdtemp(join(tmpdir(), "zao-sandbox-patch-"));
       patchFile = join(tmpDir, "sandbox.patch");
       await writeFile(patchFile, diff, "utf-8");
     } catch (error: unknown) {

@@ -3,8 +3,8 @@
  *
  * Tests cover:
  * - TEST-1: Binary compiles without errors (manual — verified in build step)
- * - TEST-2: `mo run "test"` parses the argument correctly
- * - TEST-3: `mo` with no arguments prints usage help (fail-closed)
+ * - TEST-2: `zao run "test"` parses the argument correctly
+ * - TEST-3: `zao` with no arguments prints usage help (fail-closed)
  *
  * Note: Since Story 006, the `run` command executes the full pipeline
  * (session init → context build → LLM call). Without a configured API key,

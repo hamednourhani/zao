@@ -35,8 +35,8 @@ import { z } from "zod";
 /**
  * Valid actor types for decision log entries.
  * - `llm`: A language model agent made the decision.
- * - `harness`: The mo harness infrastructure made the decision.
- * - `controller`: The mo controller/orchestration layer made the decision.
+ * - `harness`: The zao harness infrastructure made the decision.
+ * - `controller`: The zao controller/orchestration layer made the decision.
  * - `user`: A human user made the decision.
  */
 export const ActorSchema = z.enum(["llm", "harness", "controller", "user"]);

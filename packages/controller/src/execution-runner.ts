@@ -243,7 +243,7 @@ export class MockHarnessClient implements HarnessClient {
 
     const sessionId = response.sessionId ?? randomUUID();
     const sessionDir =
-      response.sessionDir ?? `/tmp/mo-mock-session-${sessionId}`;
+      response.sessionDir ?? `/tmp/zao-mock-session-${sessionId}`;
 
     const defaultEvents: Array<Record<string, unknown>> = [
       {
@@ -371,7 +371,7 @@ export interface ExecuteParams {
    * Whether to use git worktree sandboxing (default: true).
    *
    * When enabled (default), the controller creates a git worktree at
-   * `/tmp/mo-sandbox-<executionId>` before execution. All harness
+   * `/tmp/zao-sandbox-<executionId>` before execution. All harness
    * operations then run inside the worktree. On success, the diff is
    * applied to the original repo. On failure, the worktree is discarded.
    *

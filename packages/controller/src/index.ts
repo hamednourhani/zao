@@ -1,5 +1,5 @@
 /**
- * @zao/controller — orchestration layer for the mo platform.
+ * @zao/controller — orchestration layer for the zao platform.
  *
  * Public entry point. Exports:
  * - Role registry (resolveRole, generateOrchestrationSpec, etc.)

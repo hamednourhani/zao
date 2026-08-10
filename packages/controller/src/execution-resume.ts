@@ -1,5 +1,5 @@
 /**
- * Execution Resume — `mo controller resume execution` implementation.
+ * Execution Resume — `zao controller resume execution` implementation.
  *
  * ## R-006A Changes
  *
@@ -84,7 +84,7 @@ function validateSpecRolesFromSnapshot(
       ok: false,
       error:
         "Cannot replay execution: orchestration-spec.json has no valid role definitions. " +
-        "The spec may be from an older version of mo.",
+        "The spec may be from an older version of zao.",
       isValidationError: true,
     };
   }
@@ -209,7 +209,7 @@ export async function resumeExecution(
       executionId,
       error:
         `Execution "${executionId}" not found at "${executionDir}". ` +
-        'Check the id or run "mo controller list".',
+        'Check the id or run "zao controller list".',
       completed: false,
       isValidationError: true,
     };
@@ -454,7 +454,7 @@ export function buildResumeExecuteParams(
   if (!fpSnapshot) {
     throw new Error(
       "Cannot build resume params: orchestration spec has no flow_package snapshot. " +
-      "This execution may be from an older version of mo and cannot be resumed.",
+      "This execution may be from an older version of zao and cannot be resumed.",
     );
   }
 

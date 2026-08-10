@@ -1,5 +1,5 @@
 /**
- * Controller CLI — `mo run` / `mo crunch` / `mo analyze` entry point.
+ * Controller CLI — `zao run` / `zao crunch` / `zao analyze` entry point.
  *
  * ## Design
  *
@@ -10,10 +10,10 @@
  * ## Usage
  *
  * ```bash
- * mo run --flow default --task "Build the thing" --yes
- * mo run --blueprint feature-development --task "Implement login"
- * mo crunch "How do I add rate limiting?"
- * mo analyze --store-root ~/.zao
+ * zao run --flow default --task "Build the thing" --yes
+ * zao run --blueprint feature-development --task "Implement login"
+ * zao crunch "How do I add rate limiting?"
+ * zao analyze --store-root ~/.zao
  * ```
  *
  * @module cli
@@ -204,7 +204,7 @@ export function validateArgs(parsed: ParsedArgs): string | null {
   // ── "crunch" validation ─────────────────────────────────────────
   if (cmd === "crunch") {
     if (!parsed.question || parsed.question.trim() === "") {
-      return "A question is required for mo crunch.";
+      return "A question is required for zao crunch.";
     }
     return null;
   }
@@ -221,13 +221,13 @@ export function validateArgs(parsed: ParsedArgs): string | null {
 
 function printHelp(): void {
   const help = [
-    "mo — Control and advisory plane for the mo agent platform",
+    "zao — Control and advisory plane for the zao agent platform",
     "",
     "Usage:",
-    "  mo run --flow <package-id|path> [--task <task>] [options]",
-    "  mo run --blueprint <id|path> --task <task> [options]",
-    "  mo crunch <question> [options]",
-    "  mo analyze [--store-root <path>] [options]",
+    "  zao run --flow <package-id|path> [--task <task>] [options]",
+    "  zao run --blueprint <id|path> --task <task> [options]",
+    "  zao crunch <question> [options]",
+    "  zao analyze [--store-root <path>] [options]",
     "",
     "Commands:",
     "  run          Execute a flow or blueprint pipeline",
@@ -252,10 +252,10 @@ function printHelp(): void {
     "  --store-root <path>       Path to zao store root (default: ~/.zao)",
     "",
     "Examples:",
-    "  mo run --flow default --task 'Refactor auth module'",
-    "  mo run --blueprint feature-development --task 'Implement login'",
-    "  mo crunch 'How do I add rate limiting to the API?'",
-    "  mo analyze --store-root ~/.zao",
+    "  zao run --flow default --task 'Refactor auth module'",
+    "  zao run --blueprint feature-development --task 'Implement login'",
+    "  zao crunch 'How do I add rate limiting to the API?'",
+    "  zao analyze --store-root ~/.zao",
   ].join("\n");
   process.stdout.write(help + "\n");
 }

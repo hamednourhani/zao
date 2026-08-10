@@ -120,7 +120,7 @@ describe("createSandbox", () => {
 
     expect(sandbox).not.toBeNull();
     expect(sandbox!.executionId).toBe("test-exec-id");
-    expect(sandbox!.worktreePath).toContain("/tmp/mo-sandbox-test-exec-id");
+    expect(sandbox!.worktreePath).toContain("/tmp/zao-sandbox-test-exec-id");
     expect(sandbox!.originalDir).toBe(gitRepoDir);
 
     const calls = await readGitCalls(logPath);
@@ -137,7 +137,7 @@ describe("createSandbox", () => {
 
   test("fails when worktree already exists", async () => {
     // Create the worktree path first to simulate a stale sandbox
-    const worktreePath = "/tmp/mo-sandbox-dup-test";
+    const worktreePath = "/tmp/zao-sandbox-dup-test";
     try {
       await fs.mkdir(worktreePath, { recursive: true });
     } catch { /* ignore */ }
@@ -198,7 +198,7 @@ describe("createSandbox", () => {
       // git add -A: succeeds
       { exitCode: 0, stdout: "" },
       // git commit: succeeds
-      { exitCode: 0, stdout: "[main (root-commit)] mo sandbox init\n" },
+      { exitCode: 0, stdout: "[main (root-commit)] zao sandbox init\n" },
       // rev-parse re-verify: succeeds — isGitRepo after init
       { exitCode: 0, stdout: tempDir + "\n" },
       // worktree add: succeeds
@@ -290,7 +290,7 @@ describe("applySandboxChanges", () => {
     ]);
 
     const sandbox = {
-      worktreePath: "/tmp/mo-sandbox-test",
+      worktreePath: "/tmp/zao-sandbox-test",
       originalDir: tempDir,
       executionId: "test",
     };
@@ -308,7 +308,7 @@ describe("applySandboxChanges", () => {
     ]);
 
     const sandbox = {
-      worktreePath: "/tmp/mo-sandbox-empty",
+      worktreePath: "/tmp/zao-sandbox-empty",
       originalDir: tempDir,
       executionId: "test",
     };
@@ -326,7 +326,7 @@ describe("applySandboxChanges", () => {
     ]);
 
     const sandbox = {
-      worktreePath: "/tmp/mo-sandbox-fail",
+      worktreePath: "/tmp/zao-sandbox-fail",
       originalDir: tempDir,
       executionId: "test",
     };
@@ -345,7 +345,7 @@ describe("discardSandbox", () => {
     ]);
 
     const sandbox = {
-      worktreePath: "/tmp/mo-sandbox-remove",
+      worktreePath: "/tmp/zao-sandbox-remove",
       originalDir: tempDir,
       executionId: "test",
     };
@@ -368,7 +368,7 @@ describe("discardSandbox", () => {
     ]);
 
     const sandbox = {
-      worktreePath: "/tmp/mo-sandbox-grace",
+      worktreePath: "/tmp/zao-sandbox-grace",
       originalDir: tempDir,
       executionId: "test",
     };
