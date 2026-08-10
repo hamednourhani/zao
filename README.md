@@ -87,7 +87,7 @@ zao has a **two-plane architecture**:
 - **Control plane** (harness, controller, blueprint, contracts, llm-clients): Executes flows and manages sessions.
 - **Advisory plane** (crunch, analyzer): Researches problems and verifies outputs.
 
-![Architecture](docs/architecture/overview.md)
+- [Architecture](docs/architecture/overview.md)
 
 ## Packages
 
