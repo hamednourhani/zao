@@ -1,27 +1,24 @@
-.PHONY: install test test-fast lint build dist-macos dist-linux clean
+.PHONY: install uninstall test test-fast lint build dist-macos dist-linux clean
 
 install:  ## one-stop setup — install deps, link binary, show config steps
+	@echo "==> Cleaning any stale links..."
+	-bun unlink --all 2>/dev/null
+	@echo ""
 	@echo "==> Installing dependencies..."
 	bun install
 	@echo ""
 	@echo "==> Linking zao binary..."
 	bun link
 	@echo ""
-	@echo "==> zao is now installed globally. Type 'zao' to verify."
+	@echo "==> zao is now installed globally. Type 'zao --help' to verify."
 	@echo ""
 	@if [ -f "$$HOME/.zao/llm-providers.yaml" ]; then \
 		echo "✓ Config found at ~/.zao/llm-providers.yaml"; \
 	else \
-		echo "► No config found. Create one:"; \
-		echo ""; \
-		echo '  mkdir -p ~/.zao'; \
-		echo '  echo "providers:" > ~/.zao/llm-providers.yaml'; \
-		echo '  echo "  deepseek:" >> ~/.zao/llm-providers.yaml'; \
-		echo '  echo \"    api_key: \\\"\$$DEEPSEEK_API_KEY\\\"\" >> ~/.zao/llm-providers.yaml'; \
-		echo '  echo "    default_model: deepseek-chat" >> ~/.zao/llm-providers.yaml'; \
-		echo "  export DEEPSEEK_API_KEY=sk-your-key-here"; \
-		echo ""; \
-		echo '  Then: zao run dev-cycle "Your first task"'; \
+		echo "► No config found. Set it up:"; \
+		echo "  bun run scripts/setup-config.ts"; \
+		echo "  export DEEPSEEK_API_KEY=sk-your-key"; \
+		echo '  zao run --blueprint dev-cycle --task "Your first task"'; \
 	fi
 
 test:  ## full gate — tsc + guardrail grep + bun test (incl. e2e)
@@ -77,3 +74,7 @@ dist-linux: build  ## create Linux distribution artifact (tar.gz)
 clean:  ## remove build artifacts and dist directory
 	rm -rf dist/
 	@echo "Build artifacts cleaned."
+
+uninstall:  ## remove global zao binary link
+	bun unlink --all 2>/dev/null || true
+	@echo "zao unlinked."
