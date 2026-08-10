@@ -18,7 +18,7 @@ bun run scripts/setup-config.ts
 ```
 Or create `~/.zao/llm-providers.yaml` manually:
 ```yaml
-providers:
+llm_providers:
   deepseek:
     api_key: "${DEEPSEEK_API_KEY}"
     default_model: deepseek-chat

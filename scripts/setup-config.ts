@@ -26,7 +26,7 @@ if (apiKeyArg) {
   const key = apiKeyArg.split("=")[1];
   mkdirSync(configDir, { recursive: true });
   writeFileSync(configFile, [
-    "providers:",
+    "llm_providers:",
     "  deepseek:",
     `    api_key: "${key}"`,
     "    default_model: deepseek-chat",
