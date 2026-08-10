@@ -48,13 +48,13 @@ if (!apiKey) {
 
 mkdirSync(configDir, { recursive: true });
 writeFileSync(configFile, [
-  "providers:",
-  "  deepseek:",
-  `    api_key: "${apiKey}"`,
-  "    default_model: deepseek-chat",
-  "    models: [deepseek-chat]",
-  ""
-].join("\n"));
+    "llm_providers:",
+    "  deepseek:",
+    `    api_key: "${apiKey}"`,
+    "    default_model: deepseek-chat",
+    "    models: [deepseek-chat]",
+    ""
+  ].join("\n"));
 
 console.log(`\n✓ Config created at ${configFile}`);
 console.log('  Try: zao run dev-cycle "Your first task" --verbose');
