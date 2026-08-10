@@ -16,9 +16,10 @@
  * @module crunch-cli
  */
 
-import { crunch } from "@zao/crunch";
+import { crunch, type GenerateStructuredFn } from "@zao/crunch";
 import type { CrunchOutput } from "@zao/crunch";
 import { createDefaultRegistry } from "@zao/llm-clients";
+import { generateObject } from "ai";
 import { execute } from "./execution-runner.ts";
 import type { ExecutionResult } from "./execution-runner.ts";
 
@@ -66,9 +67,30 @@ export async function runCrunchCLI(
   const registryFn = options._createRegistry ?? createDefaultRegistry;
   const crunchFn = options._crunch ?? crunch;
   const registry = await registryFn();
+
+  // Wire up real LLM generation via Vercel AI SDK
+  const generateFn: GenerateStructuredFn = async (
+    prompt, schema, client, genOptions,
+  ) => {
+    try {
+      const model = client.createModel(genOptions ?? {});
+      const result = await generateObject({
+        model,
+        schema,
+        prompt,
+        ...(genOptions?.maxTokens ? { maxTokens: genOptions.maxTokens } : {}),
+      });
+      return { success: true, result: result.object };
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : String(error);
+      return { success: false, error: message };
+    }
+  };
+
   const crunchOutput: CrunchOutput = await crunchFn(
     { question: options.question, projectDir },
     registry,
+    { _generate: generateFn },
   );
 
   // ── Phase 2: Execute blueprint (inside sandbox by default) ───────

@@ -19,6 +19,7 @@
     "@zao/contracts": "file:../contracts",
     "@zao/crunch": "file:../crunch",
     "@zao/llm-clients": "file:../llm-clients",
+    "ai": "^7.0.48",
     "ajv": "^8.17.1",
     "yaml": "^2.9.0",
     "zod": "^4.4.3"
