@@ -23,7 +23,17 @@ Read the full rationale in [docs/architecture/overview.md](docs/architecture/ove
 ### Install
 ```bash
 git clone https://github.com/hamednourhani/zao.git
-cd zao && bun install
+cd zao && make install       # or: bun install
+```
+
+This installs all 7 packages via Bun workspaces. Run zao locally:
+
+```bash
+# Direct invocation (always works)
+bun run packages/controller/src/cli.ts run dev-cycle "My first task"
+
+# Or make 'zao' a global command
+bun link && zao run dev-cycle "My first task"
 ```
 
 ### Configure

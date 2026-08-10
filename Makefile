@@ -1,4 +1,7 @@
-.PHONY: test test-fast lint build dist-macos dist-linux clean
+.PHONY: install test test-fast lint build dist-macos dist-linux clean
+
+install:  ## install dependencies across all packages
+	bun install
 
 test:  ## full gate — tsc + guardrail grep + bun test (incl. e2e)
 	cd packages/contracts && bun test

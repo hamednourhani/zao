@@ -1,0 +1,31 @@
+{
+  "name": "zao",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Deterministic, file-based LLM agent orchestration platform — YAML blueprints, two-plane architecture, schema-validated state",
+  "bin": {
+    "zao": "packages/controller/src/cli.ts"
+  },
+  "workspaces": [
+    "packages/contracts",
+    "packages/llm-clients",
+    "packages/blueprint",
+    "packages/harness",
+    "packages/controller",
+    "packages/crunch",
+    "packages/analyzer"
+  ],
+  "scripts": {
+    "install:all": "bun install",
+    "test": "make test",
+    "lint": "make lint",
+    "build": "make build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}
