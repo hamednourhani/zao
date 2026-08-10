@@ -1,3 +1,4 @@
+#!/usr/bin/env bun
 /**
  * Controller CLI — `zao run` / `zao crunch` / `zao analyze` entry point.
  *
