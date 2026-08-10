@@ -237,8 +237,22 @@ export async function handleSessionShow(
 ): Promise<SessionShowResult> {
   const storeRoot = await resolveStoreRoot();
 
+  // Resolve partial session IDs (from `session list` truncation)
+  let fullId = options.sessionId;
+  if (fullId.length < 32) {
+    try {
+      const entries = await readGlobalIndex(storeRoot, {});
+      const match = entries.find((e) => e.session_id.startsWith(fullId));
+      if (match) {
+        fullId = match.session_id;
+      }
+    } catch {
+      // Index unreadable — proceed with original id
+    }
+  }
+
   // Resolve session directory
-  const sessionDir = await findSessionDir(storeRoot, options.sessionId);
+  const sessionDir = await findSessionDir(storeRoot, fullId);
   if (!sessionDir) {
     return {
       success: false,
