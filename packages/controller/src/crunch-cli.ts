@@ -64,6 +64,7 @@ export async function runCrunchCLI(
   const projectDir = options.projectDir ?? process.cwd();
 
   // ── Phase 1: Research (outside sandbox) ──────────────────────────
+  process.stderr.write(`[crunch] Starting research for: "${options.question}"\n`);
   const registryFn = options._createRegistry ?? createDefaultRegistry;
   const crunchFn = options._crunch ?? crunch;
   const registry = await registryFn();
@@ -92,8 +93,10 @@ export async function runCrunchCLI(
     registry,
     { _generate: generateFn },
   );
+  process.stderr.write(`[crunch] Research complete — ${crunchOutput.researchSteps.length} perspectives\n`);
 
   // ── Phase 2: Execute blueprint (inside sandbox by default) ───────
+  process.stderr.write(`[crunch] Executing blueprint: ${crunchOutput.blueprint.blueprint_id}\n`);
   const executeFn = options._execute ?? execute;
   const result = await executeFn({
     task: options.question,
