@@ -22,6 +22,8 @@ import { createDefaultRegistry } from "@zao/llm-clients";
 import { generateObject } from "ai";
 import { execute } from "./execution-runner.ts";
 import type { ExecutionResult } from "./execution-runner.ts";
+import type { ToolApprovalRequest, ToolApprovalResponse } from "./human-gate.ts";
+import type { LoopCloseState } from "./schemas/flow.ts";
 
 /**
  * Options for {@link runCrunchCLI}.
@@ -37,6 +39,10 @@ export interface CrunchCLIOptions {
   autoYes?: boolean;
   /** Output format. @default "table" */
   format?: "table" | "json";
+  /** Tool approval callback for the execution phase. */
+  onToolApproval?: (req: ToolApprovalRequest) => Promise<ToolApprovalResponse>;
+  /** Loop close callback for blueprint execution loops. */
+  onLoopClose?: (state: LoopCloseState) => Promise<"continue" | "exit">;
   /**
    * **Internal/test-only.** Override the `execute` function for
    * deterministic testing without real LLM calls.
@@ -101,7 +107,9 @@ export async function runCrunchCLI(
     autoYes: options.autoYes ?? false,
     projectDir,
     format: options.format ?? "table",
-    sandbox: options.sandbox !== false, // true by default
+    sandbox: options.sandbox !== false,
+    onToolApproval: options.onToolApproval,
+    onLoopClose: options.onLoopClose,
   });
 
   return result;

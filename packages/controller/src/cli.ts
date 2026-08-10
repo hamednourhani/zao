@@ -509,6 +509,8 @@ async function runCrunchCommand(parsed: ParsedArgs): Promise<void> {
       sandbox: !parsed.noSandbox,
       autoYes: parsed.yes,
       format: parsed.format ?? "table",
+      onToolApproval,
+      onLoopClose: promptLoopClose,
     });
 
     if (parsed.format === "json") {
