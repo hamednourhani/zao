@@ -1577,12 +1577,18 @@ export async function execute(
 
     sessionIds.push(jobResult.sessionId);
 
-    await appendExecutionIndexLine(executionDir, {
-      session_id: jobResult.sessionId,
-      status: jobResult.success ? "complete" : "failed",
-      started_at: new Date().toISOString(),
-      completed_at: new Date().toISOString(),
-    });
+    if (jobResult.sessionId) {
+      await appendExecutionIndexLine(executionDir, {
+        session_id: jobResult.sessionId,
+        status: jobResult.success ? "complete" : "failed",
+        started_at: new Date().toISOString(),
+        completed_at: new Date().toISOString(),
+      });
+    } else {
+      logger.warn(
+        `[zao] Skipping index line for step "${step.id}" — no session was created (harness error: ${jobResult.error ?? "unknown"})`,
+      );
+    }
 
     // ── R-010: Context budget tracking ─────────────────────────────
     const stepTokens = estimateTokensFromEvents(jobResult.events);
