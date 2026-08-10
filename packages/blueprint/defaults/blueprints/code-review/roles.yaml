@@ -1,0 +1,11 @@
+# Role definitions for the code-review blueprint.
+schema_version: "0.3.0"
+
+model_defaults:
+  default_llm_id: "deepseek:deepseek-chat"
+
+roles:
+  reviewer:
+    prompt_template: "You are a code reviewer. Analyze code for security vulnerabilities, correctness issues, and adherence to conventions. Identify edge cases, potential bugs, and deviations from established patterns. Generate clear, actionable reports."
+    context_budget: 0.50
+    llm_id: null

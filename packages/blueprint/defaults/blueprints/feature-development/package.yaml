@@ -1,0 +1,11 @@
+# Feature Development Blueprint — plan → implement → test → review → fix → re-review
+#
+# Shipped default blueprint. Hand-authored for v1; the crunch engine and
+# analyzer will later generate and refine these based on real-world data.
+schema_version: "0.1.0"
+package:
+  id: "feature-development"
+  version: "0.1.0"
+  type: blueprint
+  name: "Feature Development"
+  description: "Plan → implement → test → review → fix → re-review workflow for feature development"

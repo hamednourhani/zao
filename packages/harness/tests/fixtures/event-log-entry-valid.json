@@ -1,0 +1,13 @@
+{
+  "schema_version": "0.2.0",
+  "event_id": "018f1234-5678-7abc-8000-123456789abc",
+  "session_id": "018f1234-5678-7abc-8000-123456789abd",
+  "parent_session_id": null,
+  "timestamp": "2026-08-02T14:30:00.000Z",
+  "agent_role": "developer",
+  "model_id": "deepseek-v4-pro",
+  "prompt_tokens": 1250,
+  "completion_tokens": 340,
+  "cache_hit": false,
+  "action": "implement_schema_contracts"
+}

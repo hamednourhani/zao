@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mo.dev/schemas/roles.schema.json",
+  "title": "mo roles file schema",
+  "description": "Schema for the mo roles configuration file. Defines agent roles, their prompts, context budgets, and LLM model assignments.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "model_defaults", "roles"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.3.0"],
+      "description": "Schema contract version for the roles file format."
+    },
+    "model_defaults": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["default_llm_id"],
+      "properties": {
+        "default_llm_id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Default canonical LLM identifier (provider:model-slug) used when a role does not specify its own llm_id."
+        }
+      },
+      "description": "Default LLM model configuration for the layer."
+    },
+    "roles": {
+      "type": "object",
+      "description": "Map of role names to their definitions.",
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_-]*$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["prompt_template", "context_budget"],
+          "properties": {
+            "prompt_template": {
+              "type": "string",
+              "minLength": 1,
+              "description": "System prompt template for the role. Supports {{variable}} substitution only. No eval or code execution."
+            },
+            "context_budget": {
+              "type": "number",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Fraction of the model context window allocated to this role (0-1)."
+            },
+            "llm_id": {
+              "oneOf": [
+                { "type": "string", "minLength": 1 },
+                { "type": "null" }
+              ],
+              "description": "Canonical LLM identifier (provider:model-slug) for this role. null means inherit the layer's default_llm_id."
+            }
+          }
+        }
+      }
+    }
+  }
+}

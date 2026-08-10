@@ -1,0 +1,11 @@
+# zao-read-codebase Blueprint — read a file and summarize its contents.
+#
+# Demonstrates R-009 tool-aware blueprint execution.
+# v1: 2 steps (read + summarize) using readFile tool.
+schema_version: "0.1.0"
+package:
+  id: "zao-read-codebase"
+  version: "0.1.0"
+  type: blueprint
+  name: "Read Codebase"
+  description: "Read a file and summarize its contents using tool-aware execution."

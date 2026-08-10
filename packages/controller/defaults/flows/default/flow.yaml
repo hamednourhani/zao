@@ -1,0 +1,11 @@
+# Default flow definition for the default flow package.
+# Migrated from packages/controller/defaults/flow.yaml (R-006A).
+#
+# Single-step: developer role. The controller defaults to a single
+# developer step — users and Rey override this with richer flows.
+schema_version: "0.2.0"
+steps:
+  - id: default
+    role: developer
+    task: "Execute the task as specified."
+    context: "Execute the task as specified."

@@ -1,0 +1,25 @@
+{
+  "name": "@zao/blueprint",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Blueprint package compiler — advisory-plane compiler that produces flow packages from blueprint templates",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "dependencies": {
+    "@zao/contracts": "file:../contracts",
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

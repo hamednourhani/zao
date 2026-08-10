@@ -1,0 +1,7 @@
+{
+  "schema_version": "0.1.0",
+  "status": "success",
+  "summary": "Done.",
+  "changes": [],
+  "extra_unknown_field": "this should be rejected by strict mode"
+}

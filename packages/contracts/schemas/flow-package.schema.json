@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mo.dev/schemas/flow-package.schema.json",
+  "title": "Flow Package Metadata",
+  "description": "Metadata for a flow package directory. A flow package bundles a flow definition, role definitions, and package metadata into a self-contained unit.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.1.0"],
+      "description": "Schema contract version for the flow package metadata file."
+    },
+    "package": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique package identifier. Used for resolution and cross-referencing."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Semantic version of this package."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["flow"],
+          "description": "Package type. Must be 'flow' for flow packages."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable name of the package."
+        },
+        "description": {
+          "type": "string",
+          "description": "Human-readable description of the package's purpose."
+        }
+      },
+      "required": ["id", "version", "type", "name"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["schema_version", "package"],
+  "additionalProperties": false
+}

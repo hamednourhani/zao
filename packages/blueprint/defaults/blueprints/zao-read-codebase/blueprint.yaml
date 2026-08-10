@@ -1,0 +1,19 @@
+# Read Codebase Blueprint — tool-aware execution demo.
+#
+# Step 1 (read): Uses the readFile tool to read a file specified by the task.
+# Step 2 (summarize): Summarizes the file contents. Runs only if read succeeded.
+schema_version: "0.2.0"
+blueprint_id: "zao-read-codebase"
+
+steps:
+  - id: read
+    role: developer
+    task_template: "Read the file specified in the task and report what it contains. Task: {task}"
+    tools:
+      - tool: readFile
+        scope: "agent_decides"
+
+  - id: summarize
+    role: reviewer
+    task_template: "Summarize the file contents from the previous step in 3 bullet points. Task context: {task}"
+    when: read.status == "success"

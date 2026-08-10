@@ -1,0 +1,26 @@
+{
+  "name": "@zao/crunch",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Research pipeline — multi-step LLM-driven analysis that takes a user question and produces a blueprint",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "dependencies": {
+    "@zao/blueprint": "file:../blueprint",
+    "@zao/contracts": "file:../contracts",
+    "@zao/llm-clients": "file:../llm-clients",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

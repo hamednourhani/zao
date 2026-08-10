@@ -1,0 +1,12 @@
+# Dev-Review Loop Blueprint — implement → review → (requires_actions → back to implement) → doc
+#
+# Demonstrates R-010 iterative flow loops with session resume on re-iterations.
+# The reviewer produces structured output with status/findings/recommended_next.
+# If the reviewer says "requires_actions", the controller jumps back to implement.
+schema_version: "0.1.0"
+package:
+  id: "dev-review-loop"
+  version: "1.0.0"
+  type: blueprint
+  name: "Dev-Review Loop"
+  description: "Implement → review → loop back on requires_actions → document workflow"

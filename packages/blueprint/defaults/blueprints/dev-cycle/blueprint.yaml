@@ -1,0 +1,75 @@
+# dev-cycle Blueprint — read → plan → implement → review (loop)
+#
+# Step 1 (read):      Read the relevant files to understand the task.
+# Step 2 (plan):      Plan the implementation — pure thinking step, no tools.
+#                      Runs only if read succeeded.
+# Step 3 (implement): Implement the changes following the plan. Has readFile,
+#                      writeFile (auto-approved), and executeShell (gated).
+#                      Runs only if plan succeeded. Loop target.
+# Step 4 (review):    Review the implementation. Runs only if implement succeeded.
+#                      If review returns requires_actions, loops back to implement.
+#                      If review returns success, the loop exits.
+#
+# Tool declarations on implement: writeFile has requires_approval: false
+# (confined to project), executeShell has requires_approval: true (gated by harness).
+schema_version: "0.2.0"
+blueprint_id: "dev-cycle"
+
+steps:
+  - id: read
+    role: developer
+    task_template: "Read the relevant files to understand {task}. Examine the code, tests, and any related files."
+    tools:
+      - tool: readFile
+        scope: "agent_decides"
+
+  - id: plan
+    role: developer
+    task_template: "Plan the implementation of {task}. Describe what changes you will make, why, which files are affected, and how you will verify correctness. Do NOT make any code changes yet — this is a planning step only."
+    when: read.status == "success"
+    context_spec:
+      text: "Use the file contents from the read step to create a concrete implementation plan."
+      receive_from:
+        - read
+
+  - id: implement
+    role: developer
+    task_template: "Implement {task} following the plan. Write code, add tests, and update documentation/comments. If the previous implementation attempt failed review, address the specific feedback."
+    when: plan.status == "success"
+    context_spec:
+      text: "Follow the plan from the plan step. If this is a retry iteration, address the specific review feedback."
+      receive_from:
+        - plan
+        - review
+    tools:
+      - tool: readFile
+        scope: "agent_decides"
+      - tool: writeFile
+        scope: "agent_decides"
+        requires_approval: false
+      - tool: executeShell
+        scope: "agent_decides"
+        requires_approval: true
+    loop:
+      target: implement
+      max_iterations: 5
+      exit_when: 'review.status == "success"'
+
+  - id: review
+    role: developer
+    task_template: "Review the implementation of {task}. Check correctness, tests, documentation, and edge cases. Return structured output: status 'success' if ready, or status requires_actions with specific findings if revisions are needed."
+    when: implement.status == "success"
+    context_spec:
+      text: "Review all changes made during implementation. Verify tests pass, documentation is complete, and no regressions were introduced."
+      receive_from:
+        - implement
+        - plan
+    tools:
+      - tool: readFile
+        scope: "agent_decides"
+      - tool: executeShell
+        scope: "agent_decides"
+        requires_approval: true
+    output_spec:
+      status: requires_actions
+      recommended_next: implement

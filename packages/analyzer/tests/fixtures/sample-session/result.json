@@ -1,0 +1,12 @@
+{
+  "session_id": "sess-001",
+  "status": "success",
+  "summary": "Successfully implemented rate limiting middleware.",
+  "changes": [
+    {"file": "src/middleware/rate-limit.ts", "type": "writeFile"},
+    {"file": "tests/rate-limit.test.ts", "type": "writeFile"}
+  ],
+  "duration_ms": 25000,
+  "llm_calls": 2,
+  "tool_calls": 5
+}

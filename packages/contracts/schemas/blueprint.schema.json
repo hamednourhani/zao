@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hamednourhani/yue/schemas/blueprint.schema.json",
+  "title": "Blueprint schema",
+  "description": "Blueprint definition — ordered list of parameterized steps compiled into a flow package by the blueprint compiler.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.2.0"],
+      "description": "Schema contract version."
+    },
+    "blueprint_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier for this blueprint (must match package.id in package.yaml)."
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered list of blueprint steps.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]*$",
+            "minLength": 1,
+            "description": "Unique step identifier. Must be lowercase alphanumeric, underscores, hyphens."
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Role name resolved via the blueprint's role definitions."
+          },
+          "task_template": {
+            "type": "string",
+            "minLength": 1,
+            "description": "REQUIRED — parameterized task template. {task} is substituted with the user's task at compile time. Maps to the flow step's task field."
+          },
+          "context_spec": {
+            "oneOf": [
+              {
+                "type": "string",
+                "minLength": 1,
+                "description": "Optional static framing prepended to the task before handing to the role."
+              },
+              {
+                "type": "object",
+                "properties": {
+                  "text": {
+                    "type": "string",
+                    "minLength": 1,
+                    "description": "Static framing text."
+                  },
+                  "receive_from": {
+                    "type": "array",
+                    "minItems": 1,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^[a-z0-9][a-z0-9_.-]*$"
+                    },
+                    "description": "Optional list of step IDs whose output context is pulled into this step."
+                  }
+                },
+                "required": ["text"],
+                "additionalProperties": false
+              }
+            ]
+          },
+          "when": {
+            "type": "string",
+            "description": "Optional gate condition. v1 grammar: '<step-id>.status == \"success\" | \"failed\"'. References must point to EARLIER steps."
+          },
+          "tools": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "Optional tool declarations for this step. Each tool specifies a capability the agent may use at runtime. The agent decides which files/commands to operate on (scope: agent_decides).",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tool": {
+                  "type": "string",
+                  "enum": ["readFile", "writeFile", "executeShell", "delegateToSubagent"],
+                  "description": "The tool capability available to the agent."
+                },
+                "scope": {
+                  "type": "string",
+                  "enum": ["agent_decides"],
+                  "description": "v1: always 'agent_decides' — the harness persona picks the file/command at runtime."
+                },
+                "requires_approval": {
+                  "type": "boolean",
+                  "description": "If true, the controller should pause for human approval before executing this tool. v1 stub: logged as warning, auto-approved."
+                }
+              },
+              "required": ["tool", "scope"],
+              "additionalProperties": false
+            }
+          },
+          "loop": {
+            "type": "object",
+            "description": "Optional loop configuration that enables iterative flow loops. When present, the controller may jump back to the target step based on output_spec evaluation.",
+            "properties": {
+              "target": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9_-]*$",
+                "description": "Step ID to jump back to when exit condition is not met. Must exist in the same flow."
+              },
+              "max_iterations": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 10,
+                "default": 3,
+                "description": "Hard cap on loop iterations (1-10)."
+              },
+              "exit_when": {
+                "type": "string",
+                "minLength": 1,
+                "description": "When expression evaluated at the end of each full flow pass through the loop. E.g. 'review.status == success'."
+              },
+              "context_budget": {
+                "type": "object",
+                "description": "Optional context budget tracking for loop iterations.",
+                "properties": {
+                  "max_tokens_per_step": {
+                    "type": "integer",
+                    "minimum": 100,
+                    "description": "Maximum estimated tokens per step."
+                  },
+                  "max_total_tokens": {
+                    "type": "integer",
+                    "minimum": 100,
+                    "description": "Maximum total estimated tokens across all loop iterations."
+                  },
+                  "compaction_strategy": {
+                    "type": "string",
+                    "enum": ["summarize", "extract_key_facts", "truncate"],
+                    "description": "Strategy for compacting context when budget is exceeded."
+                  }
+                },
+                "required": ["max_tokens_per_step", "max_total_tokens"],
+                "additionalProperties": false
+              }
+            },
+            "required": ["target", "max_iterations", "exit_when"],
+            "additionalProperties": false
+          },
+          "output_spec": {
+            "type": "object",
+            "description": "Optional structured output specification for reviewer/critic steps. Defines the expected shape of the step's result for loop routing.",
+            "properties": {
+              "status": {
+                "type": "string",
+                "enum": ["success", "failed", "requires_actions"],
+                "description": "The review verdict status."
+              },
+              "findings": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "string"
+                },
+                "description": "Optional list of specific findings from the review."
+              },
+              "recommended_next": {
+                "type": "string",
+                "pattern": "^[a-z0-9][a-z0-9_-]*$",
+                "description": "Optional recommended next step ID (must match loop.target if within a loop)."
+              }
+            },
+            "required": ["status"],
+            "additionalProperties": false
+          }
+        },
+        "required": ["id", "role", "task_template"],
+        "additionalProperties": true
+      }
+    }
+  },
+  "required": ["schema_version", "blueprint_id", "steps"],
+  "additionalProperties": false
+}

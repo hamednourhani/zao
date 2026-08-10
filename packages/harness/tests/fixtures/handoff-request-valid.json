@@ -1,0 +1,9 @@
+{
+  "schema_version": "0.1.0",
+  "task_id": "task-001",
+  "role": "developer",
+  "objective": "Implement user authentication with login and registration endpoints",
+  "artifacts": ["src/auth/login.ts", "src/auth/register.ts", "tests/auth/login.test.ts"],
+  "guardrails": ["Rule 1: No secrets in code", "Rule 2: Sanitize all inputs"],
+  "output_path": "/tmp/zao-output/task-001"
+}

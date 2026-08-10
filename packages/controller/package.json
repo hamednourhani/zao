@@ -1,0 +1,32 @@
+{
+  "name": "@zao/controller",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Orchestration layer for zao — owns role resolution, flow execution, run lifecycle, and the execution memory model",
+  "exports": {
+    ".": "./src/index.ts",
+    "./execution-store": "./src/execution-store.ts",
+    "./role-registry": "./src/role-registry.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "dependencies": {
+    "@zao/analyzer": "file:../analyzer",
+    "@zao/blueprint": "file:../blueprint",
+    "@zao/contracts": "file:../contracts",
+    "@zao/crunch": "file:../crunch",
+    "@zao/llm-clients": "file:../llm-clients",
+    "ajv": "^8.17.1",
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

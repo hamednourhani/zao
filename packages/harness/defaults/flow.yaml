@@ -1,0 +1,10 @@
+# Shipped defaults for mo flow definition.
+# This file is the base layer — all other config layers overlay on top of it.
+# See ADR-005 for the config layering model.
+#
+# Single-step: developer role.  `mo run "task"` with zero flags behaves
+# exactly like today.  This is DATA, not code — copy and edit freely.
+schema_version: "0.2.0"
+steps:
+  - id: default
+    role: developer

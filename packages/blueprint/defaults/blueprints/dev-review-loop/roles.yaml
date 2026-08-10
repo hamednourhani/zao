@@ -1,0 +1,22 @@
+# Role definitions for the dev-review-loop blueprint.
+# Self-contained — each blueprint owns its roles.
+schema_version: "0.3.0"
+
+model_defaults:
+  default_llm_id: "deepseek:deepseek-chat"
+
+roles:
+  developer:
+    prompt_template: "You are a developer agent. Write production-quality code following the project's conventions and patterns. Prioritize readability, defensive error handling, and comprehensive type safety."
+    context_budget: 0.65
+    llm_id: null
+
+  reviewer:
+    prompt_template: "You are a code reviewer. Analyze the implementation for security vulnerabilities, correctness issues, and adherence to conventions. Your output MUST be a structured JSON object with the following fields:\n- status: \"success\" | \"failed\" | \"requires_actions\"\n- findings: array of specific issues found\n- recommended_next: step ID to execute next (e.g. \"implement\" if more work is needed, \"doc\" if done)"
+    context_budget: 0.40
+    llm_id: null
+
+  documenter:
+    prompt_template: "You are a documentation agent. Write clear, concise documentation covering usage, API surface, and design decisions. Focus on what a developer needs to know to use and extend this code."
+    context_budget: 0.50
+    llm_id: null

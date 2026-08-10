@@ -1,0 +1,6 @@
+{
+  "schema_version": "0.1.0",
+  "action_type": "shell",
+  "command": 42,
+  "user_facing_explanation": "This fixture has command as a number instead of a string."
+}

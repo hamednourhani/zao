@@ -1,0 +1,14 @@
+# zao-fix Blueprint — read → analyze → fix → verify
+#
+# The "hello world" test for the entire tool execution pipeline.
+# Lets the LLM read a file, analyze it, fix it, and verify the fix
+# — with human approval at each destructive step.
+#
+# v1: 4-step pipeline with readFile, writeFile, and executeShell tools.
+schema_version: "0.1.0"
+package:
+  id: "zao-fix"
+  version: "0.1.0"
+  type: blueprint
+  name: "zao-fix"
+  description: "Read, analyze, fix, and verify — with tool execution and human gate"

@@ -1,0 +1,10 @@
+# Code Review Blueprint — focused review-only flow
+#
+# Shipped default blueprint. Single-purpose: review existing code.
+schema_version: "0.1.0"
+package:
+  id: "code-review"
+  version: "0.1.0"
+  type: blueprint
+  name: "Code Review"
+  description: "Focused code review workflow — analyze and report on code quality"

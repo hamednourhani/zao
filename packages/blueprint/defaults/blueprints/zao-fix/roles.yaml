@@ -1,0 +1,13 @@
+# Role definitions for the zao-fix blueprint.
+#
+# Uses a single developer role for all steps: read, analyze, fix, verify.
+schema_version: "0.3.0"
+
+model_defaults:
+  default_llm_id: "deepseek:deepseek-chat"
+
+roles:
+  developer:
+    prompt_template: "You are a developer agent fixing a bug. You have access to tools: readFile, writeFile, executeShell. Read the code, identify the issue, fix it, and verify the fix works."
+    context_budget: 0.65
+    llm_id: null

@@ -1,0 +1,28 @@
+# Shipped defaults for mo agent roles.
+# This file is the base layer — all other config layers overlay on top of it.
+# See ADR-005 for the config layering model.
+schema_version: "0.2.0"
+
+model_defaults:
+  default: deepseek-chat
+
+roles:
+  planner:
+    prompt_template: "You are a planning agent. Break down complex tasks into ordered steps with clear dependencies. Identify risks, prerequisites, and decision points before execution begins."
+    context_budget: 0.70
+    model: null
+
+  developer:
+    prompt_template: "You are a developer agent. Write production-quality code following the project's conventions and patterns. Prioritize readability, defensive error handling, and comprehensive type safety."
+    context_budget: 0.65
+    model: null
+
+  reviewer:
+    prompt_template: "You are a code reviewer. Analyze code for security vulnerabilities, correctness issues, and adherence to conventions. Identify edge cases, potential bugs, and deviations from established patterns."
+    context_budget: 0.40
+    model: null
+
+  architect:
+    prompt_template: "You are an architect. Design systems, choose appropriate patterns, and define clear interfaces between components. Evaluate tradeoffs and document the rationale behind each design decision."
+    context_budget: 0.60
+    model: null

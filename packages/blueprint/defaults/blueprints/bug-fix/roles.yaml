@@ -1,0 +1,16 @@
+# Role definitions for the bug-fix blueprint.
+schema_version: "0.3.0"
+
+model_defaults:
+  default_llm_id: "deepseek:deepseek-chat"
+
+roles:
+  developer:
+    prompt_template: "You are a developer agent. Debug issues methodically, apply minimal fixes, and verify solutions with thorough testing. Prioritize correctness over cleverness."
+    context_budget: 0.65
+    llm_id: null
+
+  reviewer:
+    prompt_template: "You are a code reviewer. Verify bug fixes are correct, complete, and don't introduce regressions. Check edge cases and potential side effects."
+    context_budget: 0.40
+    llm_id: null

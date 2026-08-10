@@ -1,0 +1,36 @@
+# Feature Development Blueprint
+#
+# Multi-step pipeline: plan architecture → implement code → run tests →
+# review for correctness → fix issues → re-review.
+schema_version: "0.2.0"
+blueprint_id: "feature-development"
+
+steps:
+  - id: plan
+    role: planner
+    task_template: "Plan the implementation of {task}. Identify dependencies, module boundaries, and risk areas."
+    context_spec: "Focus on architecture decisions and integration points."
+
+  - id: implement
+    role: developer
+    task_template: "Implement {task} following the plan. Write production-quality code with comprehensive tests."
+
+  - id: test
+    role: developer
+    task_template: "Run the test suite and verify that {task} works correctly. Fix any failing tests."
+    when: implement.status == "success"
+
+  - id: review
+    role: reviewer
+    task_template: "Review the implementation of {task}. Check for security issues, edge cases, and adherence to conventions."
+    when: test.status == "success"
+
+  - id: fix
+    role: developer
+    task_template: "Address review feedback for {task}. Fix issues identified during review."
+    when: review.status == "success"
+
+  - id: re-review
+    role: reviewer
+    task_template: "Re-review the fixes for {task}. Verify all feedback has been addressed."
+    when: fix.status == "success"

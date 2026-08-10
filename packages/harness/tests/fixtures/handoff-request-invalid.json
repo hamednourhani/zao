@@ -1,0 +1,7 @@
+{
+  "schema_version": "0.1.0",
+  "task_id": "task-001",
+  "role": "developer",
+  "artifacts": [],
+  "output_path": "/tmp/zao-output/task-001"
+}

@@ -1,0 +1,10 @@
+# Default flow package metadata.
+# This is the shipped default package — the base fallback when no other
+# package is specified.
+schema_version: "0.1.0"
+package:
+  id: "default"
+  version: "0.1.0"
+  type: flow
+  name: Default Flow
+  description: "Default single-step developer flow package"

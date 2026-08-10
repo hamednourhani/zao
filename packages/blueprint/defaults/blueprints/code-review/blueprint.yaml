@@ -1,0 +1,14 @@
+# Code Review Blueprint — focused review-only flow
+schema_version: "0.2.0"
+blueprint_id: "code-review"
+
+steps:
+  - id: analyze
+    role: reviewer
+    task_template: "Analyze the codebase for {task}. Identify issues and patterns."
+    context_spec: "Focus on security, correctness, and maintainability."
+
+  - id: report
+    role: reviewer
+    task_template: "Generate a review report for {task}. Summarize findings with actionable recommendations."
+    when: analyze.status == "success"

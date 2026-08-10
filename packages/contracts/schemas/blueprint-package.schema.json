@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hamednourhani/yue/schemas/blueprint-package.schema.json",
+  "title": "Blueprint package metadata schema",
+  "description": "Metadata file (package.yaml) for a blueprint package — a parameterized development-process template that compiles to a flow package.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.1.0"],
+      "description": "Schema contract version."
+    },
+    "package": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Unique package identifier."
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Semantic version of this blueprint package."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["blueprint"],
+          "description": "Must be 'blueprint' for blueprint packages."
+        },
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Human-readable name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description of what this blueprint does."
+        }
+      },
+      "required": ["id", "version", "type", "name"],
+      "additionalProperties": false
+    }
+  },
+  "required": ["schema_version", "package"],
+  "additionalProperties": false
+}

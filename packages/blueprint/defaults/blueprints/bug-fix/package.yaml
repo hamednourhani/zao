@@ -1,0 +1,10 @@
+# Bug Fix Blueprint — triage → fix → test → review
+#
+# Shipped default blueprint. Lightweight pipeline for bug fixes.
+schema_version: "0.1.0"
+package:
+  id: "bug-fix"
+  version: "0.1.0"
+  type: blueprint
+  name: "Bug Fix"
+  description: "Triage → fix → test → review workflow for bug fixes"

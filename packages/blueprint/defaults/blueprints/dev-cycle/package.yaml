@@ -1,0 +1,13 @@
+# dev-cycle Blueprint — read → plan → implement → review (loop)
+#
+# Universal development cycle: read the codebase, plan the implementation,
+# implement the changes, and review the results. The implement→review loop
+# iterates up to 5 times, with review feedback feeding into each retry.
+# Sandboxed in git worktree; human confirms merge after review approval.
+schema_version: "0.1.0"
+package:
+  id: "dev-cycle"
+  version: "0.1.0"
+  type: blueprint
+  name: "dev-cycle"
+  description: "Universal development cycle: read → plan → implement → review (with iterative loop). Sandboxed in git worktree; human confirms merge after review approval."

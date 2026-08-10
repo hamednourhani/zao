@@ -1,0 +1,24 @@
+{
+  "name": "@zao/llm-clients",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "zao LLM provider registry — owns credentials, maps canonical llm_ids to provider clients, creates Vercel AI SDK models on demand",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/deepseek": "^3.0.19",
+    "@ai-sdk/openai": "^4.0.27",
+    "@ai-sdk/provider": "^4.0.4",
+    "ai": "^7.0.48",
+    "yaml": "^2.9.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

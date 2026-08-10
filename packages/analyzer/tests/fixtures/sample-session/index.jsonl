@@ -1,0 +1,3 @@
+{"session_id": "sess-001","status": "success","task": "Implement rate limiting middleware","model": "deepseek:deepseek-chat","duration": 25000,"error_count": 0,"tool_call_count": 5}
+{"session_id": "sess-002","status": "failed","task": "Refactor authentication module","model": "deepseek:deepseek-chat","duration": 120000,"error_count": 7,"tool_call_count": 12}
+{"session_id": "sess-003","status": "awaiting_hitl","task": "Deploy to production","model": "openai:gpt-4o","duration": 30000,"error_count": 1,"tool_call_count": 2}

@@ -1,0 +1,12 @@
+{
+  "schema_version": "0.1.0",
+  "status": "success",
+  "summary": "Extra field in changes entry.",
+  "changes": [
+    {
+      "file_path": "src/index.ts",
+      "content": "console.log('hello');",
+      "diff": "should not be here"
+    }
+  ]
+}

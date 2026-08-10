@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mo.dev/schemas/llm-providers.schema.json",
+  "title": "mo LLM providers config schema",
+  "description": "Schema for the llm-providers.yaml configuration file. Defines which LLM providers and models are available.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["llm_providers"],
+  "properties": {
+    "llm_providers": {
+      "type": "object",
+      "description": "Map of provider IDs to their configuration.",
+      "minProperties": 1,
+      "additionalProperties": false,
+      "patternProperties": {
+        "^[a-z][a-z0-9_]*$": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["models"],
+          "properties": {
+            "api_key": {
+              "type": "string",
+              "description": "API key for authentication. Supports ${VAR_NAME} env substitution."
+            },
+            "base_url": {
+              "type": "string",
+              "description": "Optional base URL override for OpenAI-compatible endpoints."
+            },
+            "models": {
+              "type": "object",
+              "description": "Map of model slugs to their API model IDs.",
+              "minProperties": 1,
+              "additionalProperties": false,
+              "patternProperties": {
+                "^[a-zA-Z0-9][a-zA-Z0-9._-]*$": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["api_model_id"],
+                  "properties": {
+                    "api_model_id": {
+                      "type": "string",
+                      "minLength": 1,
+                      "description": "The actual model ID string sent to the provider API."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hamednourhani/yue/schemas/flow.schema.json",
+  "title": "mo flow schema",
+  "description": "Flow definition — ordered list of steps executed by mo's sequential executor. Consumed by mo (execution engine) and authored by Rey (orchestration package generator) or directly by users.",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "enum": ["0.2.0", "0.3.0"],
+      "description": "Schema contract version."
+    },
+    "steps": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Ordered list of flow steps.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9][a-z0-9_-]*$",
+            "minLength": 1,
+            "description": "Unique step identifier. Used in when refs, node_id, and agents index. Must be lowercase alphanumeric, underscores, hyphens."
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Role name. Resolved via role registry at load time. Unknown roles → fail closed before any LLM call."
+          },
+          "task": {
+            "type": "string",
+            "minLength": 1,
+            "description": "REQUIRED — the concrete task to execute for this step. Blueprint compilation substitutes {task} here; hand-authored flows supply the task directly."
+          },
+          "when": {
+            "type": "string",
+            "description": "Optional gate condition. v1 grammar: '<step-id>.status == \"success\" | \"failed\"'. References must point to EARLIER steps. No boolean algebra (Tier-2)."
+          },
+          "context": {
+            "type": "string",
+            "description": "Optional static framing prepended to the task before handing to the role. Maps from blueprint context_spec. When present, the effective prompt is context + newline + task."
+          },
+          "tools": {
+            "type": "array",
+            "minItems": 1,
+            "maxItems": 5,
+            "description": "Optional tool declarations for this step (R-009). Inherited from the blueprint step.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "tool": {
+                  "type": "string",
+                  "enum": ["readFile", "writeFile", "executeShell", "delegateToSubagent"]
+                },
+                "scope": {
+                  "type": "string",
+                  "enum": ["agent_decides"]
+                },
+                "requires_approval": {
+                  "type": "boolean"
+                }
+              },
+              "required": ["tool", "scope"],
+              "additionalProperties": false
+            }
+          }
+        },
+        "required": ["id", "role", "task"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["schema_version", "steps"],
+  "additionalProperties": false
+}

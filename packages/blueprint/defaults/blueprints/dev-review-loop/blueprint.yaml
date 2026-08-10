@@ -1,0 +1,43 @@
+# Dev-Review Loop Blueprint
+#
+# R-010: Iterative flow loops with session resume.
+# Structure: implement → review (with output_spec) → (loop back or doc)
+#
+# Loop mechanics:
+# - The `implement` step declares a loop that targets itself.
+# - The `review` step has an output_spec that the controller reads for routing.
+# - If review returns "requires_actions" and exit_when is not met, jump back.
+# - On re-iterations, steps RESUME existing sessions (not fresh spawn).
+# - Max 3 iterations; exceeded → human gate.
+schema_version: "0.2.0"
+blueprint_id: "dev-review-loop"
+
+steps:
+  - id: implement
+    role: developer
+    task_template: "Implement {task} following the project conventions and patterns."
+    loop:
+      target: implement
+      max_iterations: 3
+      exit_when: "review.status == \"success\""
+      context_budget:
+        max_tokens_per_step: 4000
+        max_total_tokens: 16000
+        compaction_strategy: summarize
+
+  - id: review
+    role: reviewer
+    task_template: "Review the implementation of {task}. Provide structured output with status (success, failed, or requires_actions), specific findings, and recommended next step."
+    when: "implement.status == \"success\""
+    context_spec:
+      text: "Review the code changes. Check for security issues, edge cases, correctness, and adherence to project conventions."
+      receive_from:
+        - implement
+    output_spec:
+      status: requires_actions
+      recommended_next: implement
+
+  - id: doc
+    role: documenter
+    task_template: "Document the implementation of {task}. Write clear, concise documentation covering usage, API surface, and design decisions."
+    when: "review.status == \"success\""

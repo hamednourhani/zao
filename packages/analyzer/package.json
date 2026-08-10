@@ -1,0 +1,24 @@
+{
+  "name": "@zao/analyzer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Learning engine — reads zao session data, identifies patterns, and produces improvements",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "test": "bun test",
+    "typecheck": "bunx tsc --noEmit"
+  },
+  "dependencies": {
+    "@zao/contracts": "file:../contracts",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  }
+}

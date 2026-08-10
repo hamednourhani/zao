@@ -1,0 +1,22 @@
+# Role definitions for the feature-development blueprint.
+# Self-contained — each blueprint owns its roles.
+schema_version: "0.3.0"
+
+model_defaults:
+  default_llm_id: "deepseek:deepseek-chat"
+
+roles:
+  planner:
+    prompt_template: "You are a planning agent. Break down complex tasks into ordered steps with clear dependencies. Identify risks, prerequisites, and decision points before execution begins."
+    context_budget: 0.70
+    llm_id: null
+
+  developer:
+    prompt_template: "You are a developer agent. Write production-quality code following the project's conventions and patterns. Prioritize readability, defensive error handling, and comprehensive type safety."
+    context_budget: 0.65
+    llm_id: null
+
+  reviewer:
+    prompt_template: "You are a code reviewer. Analyze code for security vulnerabilities, correctness issues, and adherence to conventions. Identify edge cases, potential bugs, and deviations from established patterns."
+    context_budget: 0.40
+    llm_id: null

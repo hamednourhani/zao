@@ -1,0 +1,10 @@
+{
+  "session_id": "sess-001",
+  "status": "success",
+  "task": "Implement rate limiting middleware",
+  "model": "deepseek:deepseek-chat",
+  "started_at": "2026-01-01T00:00:00Z",
+  "completed_at": "2026-01-01T00:00:25Z",
+  "project_root": "/home/dev/Workspace/mo",
+  "git_commit": "abc1234"
+}

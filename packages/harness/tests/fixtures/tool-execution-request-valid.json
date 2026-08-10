@@ -1,0 +1,6 @@
+{
+  "schema_version": "0.1.0",
+  "action_type": "shell",
+  "command": "bun test",
+  "user_facing_explanation": "Running the test suite to verify all tests pass before proceeding."
+}

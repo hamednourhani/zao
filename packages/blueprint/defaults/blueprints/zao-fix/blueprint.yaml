@@ -1,0 +1,48 @@
+# zao-fix Blueprint — read → analyze → fix → verify
+#
+# Step 1 (read):    Reads the relevant files to understand the code.
+# Step 2 (analyze): Identifies the root cause. Runs only if read succeeded.
+# Step 3 (fix):     Applies the fix with write tool and runs tests with 
+#                   shell tool. Both destructive actions require human approval.
+# Step 4 (verify):  Runs tests to confirm the fix passes.
+#                   Requires human approval. Runs only if fix succeeded.
+#
+# Tool declarations are metadata on each step — the harness builds the
+# system prompt with tool availability. Templates should not name tools
+# directly (compiler security regex rejects exec/eval/require/import).
+schema_version: "0.2.0"
+blueprint_id: "zao-fix"
+
+steps:
+  - id: read
+    role: developer
+    task_template: "Read the relevant files to understand {task}. Examine the code and any test files to understand the bug."
+    tools:
+      - tool: readFile
+        scope: "agent_decides"
+
+  - id: analyze
+    role: developer
+    task_template: "Analyze the code and identify the root cause of {task}. What is broken and why?"
+    when: read.status == "success"
+
+  - id: fix
+    role: developer
+    task_template: "Apply the fix for {task}. Make the necessary code changes and verify with tests."
+    when: analyze.status == "success"
+    tools:
+      - tool: writeFile
+        scope: "agent_decides"
+        requires_approval: true
+      - tool: executeShell
+        scope: "agent_decides"
+        requires_approval: true
+
+  - id: verify
+    role: developer
+    task_template: "Verify the fix for {task}. Run the tests and confirm everything passes."
+    when: fix.status == "success"
+    tools:
+      - tool: executeShell
+        scope: "agent_decides"
+        requires_approval: true

@@ -1,0 +1,24 @@
+# Bug Fix Blueprint — triage → fix → test → review
+schema_version: "0.2.0"
+blueprint_id: "bug-fix"
+
+steps:
+  - id: triage
+    role: developer
+    task_template: "Triage the bug: {task}. Identify the root cause and affected components."
+    context_spec: "Focus on reproducing the bug and narrowing the cause."
+
+  - id: fix
+    role: developer
+    task_template: "Fix the bug: {task}. Apply the minimum necessary change to resolve the issue."
+    when: triage.status == "success"
+
+  - id: test
+    role: developer
+    task_template: "Verify the fix for {task}. Run tests and confirm the bug is resolved without regressions."
+    when: fix.status == "success"
+
+  - id: review
+    role: reviewer
+    task_template: "Review the bug fix for {task}. Confirm the fix is correct and doesn't introduce new issues."
+    when: test.status == "success"

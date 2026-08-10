@@ -1,0 +1,6 @@
+{
+  "action": "review_complete",
+  "verdict": "approved",
+  "issues_found": [],
+  "summary": "All checks passed. Code is clean and follows conventions."
+}

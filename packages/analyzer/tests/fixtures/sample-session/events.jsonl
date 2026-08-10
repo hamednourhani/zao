@@ -1,0 +1,5 @@
+{"event_id": "evt-001","session_id": "sess-001","timestamp": "2026-01-01T00:00:00Z","action": "session_start","agent_role": "orchestrator","model_id": "deepseek:deepseek-chat"}
+{"event_id": "evt-002","session_id": "sess-001","timestamp": "2026-01-01T00:00:05Z","action": "llm_call_success","agent_role": "developer","model_id": "deepseek:deepseek-chat","prompt_tokens": 500,"completion_tokens": 200}
+{"event_id": "evt-003","session_id": "sess-001","timestamp": "2026-01-01T00:00:10Z","action": "tool_exec_success","agent_role": "developer","model_id": "deepseek:deepseek-chat"}
+{"event_id": "evt-004","session_id": "sess-001","timestamp": "2026-01-01T00:00:15Z","action": "llm_call_success","agent_role": "reviewer","model_id": "deepseek:deepseek-chat","prompt_tokens": 300,"completion_tokens": 150}
+{"event_id": "evt-005","session_id": "sess-001","timestamp": "2026-01-01T00:00:20Z","action": "session_complete","agent_role": "orchestrator","model_id": "deepseek:deepseek-chat"}

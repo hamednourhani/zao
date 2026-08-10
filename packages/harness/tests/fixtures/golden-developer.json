@@ -1,0 +1,6 @@
+{
+  "action": "code_change",
+  "files_modified": ["src/example.ts"],
+  "summary": "Added example function",
+  "changes": [{ "file_path": "src/example.ts", "content": "export function hello() { return 'world'; }" }]
+}

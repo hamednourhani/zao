@@ -1,0 +1,21 @@
+# LLM Providers Configuration — example template
+# Copy this to ~/.mo/llm-providers.yaml and uncomment/edit the providers you use.
+# Override the path with --llm-providers <path> or MO_LLM_PROVIDERS_PATH.
+#
+# llm_id format: provider:model-slug
+# Credentials use ${ENV_VAR} substitution — never hardcode keys.
+
+llm_providers:
+  deepseek:
+    api_key: "${DEEPSEEK_API_KEY}"
+    models:
+      deepseek-chat:
+        api_model_id: "deepseek-chat"
+
+  # openai:
+  #   api_key: "${OPENAI_API_KEY}"
+  #   models:
+  #     gpt-4o:
+  #       api_model_id: "gpt-4o"
+  #     gpt-4o-mini:
+  #       api_model_id: "gpt-4o-mini"

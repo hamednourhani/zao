@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/hamednourhani/yue/schemas/execution-result.schema.json",
+  "title": "mo execution aggregate result schema",
+  "description": "Controller-level aggregate result written to result.json in the execution directory at the end of a run. Contains per-step statuses, token usage, and execution-level metadata.",
+  "type": "object",
+  "properties": {
+    "schema_version": { "type": "string", "enum": ["0.2.0"] },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO-8601 timestamp when the result was written."
+    },
+    "flow_provenance": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Which config layer provided this flow definition."
+    },
+    "overall_success": {
+      "type": "boolean",
+      "description": "Whether the entire execution succeeded (all steps success or skipped)."
+    },
+    "error": {
+      "type": ["string", "null"],
+      "description": "Error message on failure, null on success."
+    },
+    "compiled_flow_package_dir": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Absolute path to the compiled flow package directory inside the execution dir. Contains package.yaml (with derived_from provenance), flow.yaml (with substituted tasks), and roles.yaml (with resolved roles)."
+    },
+    "steps": {
+      "type": "array",
+      "description": "Ordered list of per-step results.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string", "minLength": 1, "description": "Step identifier from the flow definition." },
+          "status": { "type": "string", "enum": ["success", "failed", "skipped"] },
+          "error": { "type": ["string", "null"], "description": "Error detail on failure, null otherwise." }
+        },
+        "required": ["id", "status", "error"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["schema_version", "timestamp", "flow_provenance", "overall_success", "error", "steps"],
+  "additionalProperties": false
+}
