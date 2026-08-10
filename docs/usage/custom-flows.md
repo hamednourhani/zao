@@ -92,5 +92,5 @@ roles:
 
 ```bash
 # Run by blueprint directory name
-bun run packages/controller/src/cli.ts run --flow security-audit "Audit the auth module"
+zao run --flow security-audit --task "Audit the auth module"
 ```

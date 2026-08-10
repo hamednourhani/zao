@@ -5,9 +5,10 @@ The controller orchestrates multi-step flows by loading blueprints and dispatchi
 ## CLI Commands
 
 ```bash
-zao run [--blueprint <name>] [--yes] [--verbose|--quiet] <task>
-zao run --flow dev-cycle "Fix the subtraction bug"
-zao run --flow bug-fix "Resolve null pointer in auth"
+zao run --flow <package-id|path> [--task <task>] [--yes] [--verbose|--quiet]
+zao run --blueprint <id|path> --task <task> [--yes] [--verbose|--quiet]
+zao run --flow dev-cycle --task "Fix the subtraction bug"
+zao run --blueprint bug-fix --task "Resolve null pointer in auth"
 ```
 
 ## Core Exports
@@ -19,12 +20,15 @@ import { execute } from "@zao/controller";
 
 const result = await execute({
   task: "Fix the subtraction bug",
-  blueprintPackage: "dev-cycle",
+  flowPackage: "dev-cycle",  // or blueprintPackage: "dev-cycle"
   projectDir: "/path/to/project",
-  harnessClient?: MockHarnessClient,  // injectable for testing
+  harnessClient?: HarnessClient,  // injectable for testing
   autoYes?: boolean,
+  sandbox?: boolean,  // default true
+  onLoopClose?: (state) => Promise<"continue" | "stop">,
+  onToolApproval?: (request) => Promise<ToolApprovalResponse>,
 });
-// result.success, result.steps, result.executionDir
+// result: { success, steps, executionId, tokenUsage, error?, isValidationFailure? }
 ```
 
 ### Human Gate
@@ -68,7 +72,7 @@ zao run "Task"               # Default: info-level
 interface StepResult {
   id: string;           // Step id from blueprint (e.g., "read", "implement")
   role: string;         // Role that executed the step
-  status: string;       // "success", "failed", "skipped", "not-run"
+  status: string;       // "success", "failed", "requires_actions", "skipped", "not-run"
   sessionId?: string;   // Harness session id for this step
 }
 ```
@@ -79,8 +83,10 @@ interface StepResult {
 interface ExecutionResult {
   success: boolean;
   steps: StepResult[];
-  executionDir: string;  // Directory with artifacts
+  executionId: string;   // Unique execution identifier
+  tokenUsage?: number;   // Total tokens consumed
   error?: string;
+  isValidationFailure?: boolean;  // Exit code 3 — blueprint validation error
 }
 ```
 

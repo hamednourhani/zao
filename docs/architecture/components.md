@@ -30,6 +30,8 @@ The execution engine — a single-job, file-based LLM agent harness.
 | `hitl.ts` | Human-in-the-loop approval prompts |
 | `artifacts.ts` | Atomic file I/O for all session artifacts |
 
+> **Note:** This list is illustrative — see `packages/harness/src/core/` for the full module inventory.
+
 **Boundaries:**
 - Does NOT orchestrate multi-step flows (that's the controller)
 - Does NOT define blueprints or roles (those come from the caller)
@@ -54,7 +56,7 @@ The flow orchestrator — loads blueprints and executes multi-step workflows.
 |--------|---------|
 | `execution-runner.ts` | Step execution engine with loop and retry logic |
 | `execution-store.ts` | File-based execution state persistence |
-| `execution-loop.ts` | Core execution loop with step orchestration |
+| `execution-resume.ts` | Core execution loop with step orchestration |
 | `flow-loader.ts` | Load blueprints and resolve roles |
 | `human-gate.ts` | Interactive approval prompts |
 | `role-registry.ts` | Load and resolve role definitions |
@@ -87,8 +89,8 @@ defaults/blueprints/<name>/
 | `bug-fix` | Focused bug fix: reproduce → diagnose → fix → verify |
 | `code-review` | Code review: read → analyze → report |
 | `feature-development` | Full feature cycle: explore → design → implement → test |
-| `mo-fix` | Self-healing: analyze mo codebase → fix |
-| `mo-read-codebase` | Codebase exploration: read → summarize |
+| `zao-fix` | Self-healing: analyze zao codebase → fix |
+| `zao-read-codebase` | Codebase exploration: read → summarize |
 | `dev-review-loop` | Review-focused: implement → review (loop) |
 
 **Boundaries:**

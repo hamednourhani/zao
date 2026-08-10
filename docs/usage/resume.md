@@ -46,6 +46,8 @@ More events = more context for the LLM, but may trigger earlier compaction.
 | All prior events | |
 | Summary (if compacted) | |
 
+> **Note:** `--role` is ignored on resume. The original role from the session manifest is always replayed. If you pass `--role`, the harness prints a warning and continues with the original.
+
 ## Resume vs Branch
 
 | Feature | Resume | Branch |

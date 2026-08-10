@@ -111,6 +111,6 @@ The `loop` field on a step enables iterative execution:
 | `bug-fix` | reproduce → diagnose → fix → verify | fix ↔ verify |
 | `code-review` | read → analyze → report | None |
 | `feature-development` | explore → design → implement → test | implement ↔ test |
-| `mo-fix` | analyze → plan → fix → verify | fix ↔ verify |
-| `mo-read-codebase` | read → summarize | None |
+| `zao-fix` | analyze → plan → fix → verify | fix ↔ verify |
+| `zao-read-codebase` | read → summarize | None |
 | `dev-review-loop` | implement → review | implement ↔ review |

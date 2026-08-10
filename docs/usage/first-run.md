@@ -38,16 +38,14 @@ EOF
 4. **Verify setup:**
 
 ```bash
-bun run packages/harness/src/index.ts run "Hello, world"
+zao run "Hello, world"
 ```
 
 ## First Command
 
 ```bash
 # Run the dev-cycle blueprint on zao's own code
-bun run packages/controller/src/cli.ts run \
-  --flow dev-cycle \
-  "Add a comment to the README"
+zao run --flow dev-cycle --task "Add a comment to the README"
 ```
 
 ## What Happens
@@ -62,13 +60,13 @@ bun run packages/controller/src/cli.ts run \
 
 ```bash
 # List all sessions
-bun run packages/harness/src/index.ts session list
+zao session list
 
 # Show details
-bun run packages/harness/src/index.ts session show <session_id>
+zao session show <session_id>
 
 # Show tree
-bun run packages/harness/src/index.ts session tree <session_id>
+zao session tree <session_id>
 ```
 
 ## Next Steps

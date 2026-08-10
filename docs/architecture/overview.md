@@ -38,7 +38,7 @@ The **control plane** is the operational layer — it executes flows, manages se
 
 | Component | Role |
 |-----------|------|
-| **harness** | Single-job LLM executor. Manages sessions, token budgets, compaction, checkpoints, and branching. |
+| **harness** | Single-job LLM executor (TD-029-F). One task, one role per invocation. Manages sessions, token budgets, compaction, checkpoints, and branching. Does NOT orchestrate multi-step flows (that's the controller). |
 | **controller** | Multi-step flow orchestrator. Loads blueprints, dispatches steps to harness, handles loops, and manages the human-in-the-loop gate. |
 | **blueprint** | Declarative flow definitions (YAML). Defines steps, roles, tool access, and loop behavior. |
 | **contracts** | Shared Zod schemas for all artifacts: sessions, events, blueprints, roles. Single source of truth. |

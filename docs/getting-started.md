@@ -19,12 +19,10 @@ echo 'providers:
     models: [deepseek-chat]' > ~/.zao/llm-providers.yaml
 
 # 3. Run your first task
-bun run packages/harness/src/index.ts run "Hello, world"
+zao run "Hello, world"
 
 # 4. Run a dev-cycle blueprint
-bun run packages/controller/src/cli.ts run \
-  --flow dev-cycle \
-  "Fix the login bug in auth.ts"
+zao run --flow dev-cycle --task "Fix the login bug in auth.ts"
 ```
 
 ## Core Concepts

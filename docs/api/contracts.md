@@ -1,103 +1,49 @@
-# contracts API Reference
+# contracts (yue) API Reference
 
-Shared Zod schemas — the single source of truth for all inter-package contracts.
+The contracts package (codename **yue**, 约 — "agreement/pact") holds every schema that crosses a tool boundary. It is language-agnostic **JSON Schema (draft 2020-12)**, fully validated with fixtures, versioned with semver.
 
-## Session Manifest Schema
+## Layout
 
-```typescript
-import { ParentManifestSchema, ChildManifestSchema } from "@zao/contracts";
-
-// Parent (root) session manifest
-const ParentManifestSchema = z.object({
-  schema_version: z.literal("0.2.0"),
-  session_id: z.string(),
-  parent_session_id: z.null(),
-  created_at: z.string(),
-  updated_at: z.string(),
-  status: SessionStatusEnum,  // "active" | "complete" | "failed" | "interrupted"
-  task: z.string(),
-  role: z.string(),
-  model_config: ModelConfigSchema,
-  repo_root: z.string().nullable(),
-  repo_remote: z.string().nullable(),
-  braned_from: BranchedFromSchema.nullable(),
-  resume_count: z.number(),
-  compaction_history: z.array(z.unknown()),
-});
-
-// BranchedFrom
-const BranchedFromSchema = z.object({
-  session_id: z.string(),
-  checkpoint_id: z.string().nullable(),
-});
+```
+packages/contracts/
+├── schemas/    one JSON Schema file per artifact type
+└── examples/   valid + invalid fixtures per schema (CI-validated)
 ```
 
-## Event Log Schema
+## Available Schemas
 
-```typescript
-import { EventLogEntrySchema } from "@zao/contracts";
+| Schema | File | Purpose |
+|--------|------|---------|
+| `roles.schema.json` | `schemas/roles.schema.json` | `roles.yaml` — personas, model assignments |
+| `flow.schema.json` | `schemas/flow.schema.json` | `flow.yaml` — orchestration flow |
+| `blueprint.schema.json` | `schemas/blueprint.schema.json` | `blueprint.yaml` — blueprint package |
+| `blueprint-package.schema.json` | `schemas/blueprint-package.schema.json` | `package.yaml` — blueprint metadata |
+| `flow-package.schema.json` | `schemas/flow-package.schema.json` | Compiled flow package |
+| `llm-providers.schema.json` | `schemas/llm-providers.schema.json` | `llm-providers.yaml` — provider config |
+| `run-output.schema.json` | `schemas/run-output.schema.json` | stdout envelope — harness↔controller contract |
+| `execution-result.schema.json` | `schemas/execution-result.schema.json` | Execution result envelope |
 
-const EventLogEntrySchema = z.object({
-  schema_version: z.literal("0.2.0"),
-  event_id: z.string(),
-  session_id: z.string(),
-  parent_session_id: z.string().nullable(),
-  timestamp: z.string(),
-  agent_role: z.string(),
-  model_id: z.string(),
-  prompt_tokens: z.number(),
-  completion_tokens: z.number(),
-  cache_hit: z.boolean(),
-  action: z.string(),
-});
-```
+## TypeScript Zod Schemas (roles only)
 
-## Session Index Schema
+The roles schemas are also available as Zod schemas for TypeScript consumers:
 
 ```typescript
 import {
-  GlobalIndexCreateEntrySchema,
-  GlobalIndexCompleteEntrySchema,
-  AgentsIndexEntrySchema,
-} from "@zao/contracts";
-
-// Creation line (appended when session starts)
-const create = {
-  session_id: "uuidv7",
-  created_at: "2026-01-01T00:00:00Z",
-  status: "active",
-  branched_from: null,  // or BranchedFrom object
-};
-
-// Completion line (appended when session ends)
-const complete = {
-  session_id: "uuidv7",
-  completed_at: "2026-01-01T01:00:00Z",
-  status: "complete",
-  agents_spawned: 3,
-  models: ["deepseek-chat"],
-  tokens: { prompt: 1000, completion: 500 },
-};
+  RolesFileSchema,
+  RoleDefinitionSchema,
+  ModelDefaultsSchema,
+} from "@zao/contracts/schemas/roles";
 ```
 
-## Blueprint Schema
+> **Note:** Internal Zod schemas for session manifests, event logs, and blueprint definitions live in their respective packages (`harness/src/schemas/`, `blueprint/src/schemas/`), not in `@zao/contracts`. The contracts package is the JSON Schema registry only.
 
-```typescript
-import { BlueprintSchema, BlueprintStepSchema } from "@zao/contracts";
-// Re-exported from @zao/blueprint
-```
+## Consumers
 
-## Role Definition Schema
+| Tool | Role | Usage |
+|------|------|-------|
+| **zao** (harness) | Deterministic execution engine | Validates `flow.yaml`/`roles.yaml` at load; writes sessions per envelope/manifest schemas |
+| **zao** (controller) | Flow orchestrator | Validates every emitted orchestration package (fail closed) |
 
-```typescript
-import { ResolvedRoleDefinitionSchema } from "@zao/contracts";
+## Versioning
 
-const ResolvedRoleDefinitionSchema = z.object({
-  prompt_template: z.string(),
-  context_budget: z.number(),
-  model: z.string(),
-  llm_id: z.string(),
-  provenance: z.string(),
-  model_provenance: z.string(),
-});
-```
+Additive change → minor; breaking change → major. Consumers pin and migrate deliberately. Artifacts carry a `schema_version` field aligned with yue releases.

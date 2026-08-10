@@ -59,7 +59,7 @@ steps:
 
 Roles are resolved by name:
 1. Blueprint's own `roles.yaml` — checked first
-2. Controller built-in roles — fallback
-3. Harness built-in roles — last resort
+2. Controller's role registry — fallback for built-in roles
+3. Harness built-in roles (developer, planner, reviewer, architect) — used when no role is specified via `--role`
 
 If a role is not found in any source, the step fails with a validation error.

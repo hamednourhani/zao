@@ -81,9 +81,19 @@ Providers are resolved via `llmId` strings in the format `provider:model`:
 Custom providers can be registered:
 
 ```typescript
-registry.registerProvider("custom", {
+import type { ProviderAdapter } from "@zao/llm-clients";
+
+const customAdapter: ProviderAdapter = {
+  providerId: "custom",
+  validateConfig: (config) => { /* ... */ },
+  createModel: (modelSlug, options, config) => { /* ... */ },
+};
+
+registry.registerProvider(customAdapter, {
   apiKey: "...",
   baseUrl: "https://api.example.com",
-  defaultModel: "model-name",
+  models: {
+    "model-name": { apiModelId: "model-name" },
+  },
 });
 ```
